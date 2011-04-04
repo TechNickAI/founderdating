@@ -134,7 +134,15 @@ INSTALLED_APPS = (
     'mptt',
     'south',
     'appmedia',
-    'menus'
+    'menus',
+    'cms.plugins.text',
+    'cms.plugins.twitter',
+    'cms.plugins.link',
+    'cms.plugins.file',
+    'cms.plugins.picture',
+    'cms.plugins.snippet',
+    'cms.plugins.video',
+    'cms.plugins.inherit'
 )
 
 # A sample logging configuration. The only tangible logging
