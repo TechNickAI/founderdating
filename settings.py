@@ -205,3 +205,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 LANGUAGES = [
     ('en', 'English'),
 ]
+# Settings http://docs.django-cms.org/en/2.1.3/getting_started/configuration.html
+# Adds a "redirect" to the advanced settings
+CMS_REDIRECTS = True
+# Adds a start/end date to advanced settings 
+CMS_SHOW_START_DATE = True
+CMS_SHOW_END_DATE = True
+# SEO fields in advanced settings
+CMS_SEO_FIELDS = True
+
