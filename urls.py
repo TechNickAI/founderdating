@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # url(r'^fd/', include('fd.foo.urls')),
     
     (r'^profiles/', include('userena.urls')),
-    url(r'^admin/', include(admin.site.urls))
+    (r'^accounts/', include('userena.urls')),
+    url(r'^internal_admin/', include(admin.site.urls))
 )
 urlpatterns += staticfiles_urlpatterns()

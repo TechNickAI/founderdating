@@ -11,10 +11,15 @@
 </head>
 <body>
 <div id="header">
-  <div class="gasket"><!-- Heh. -->
+  <div class="gasket">
     <div class="account">
-              <p>You are not signed in &nbsp;&nbsp; <a href="/profiles/signin"><img src="/static/img/header.btn.sign_in.png" alt="Sign in" /></a></p>
-          </div>
+	{% if user.is_authenticated %}
+              <p>Signed in as {{user.username}} &nbsp;&nbsp; <input type="button" onclick='window.location.href="/profiles/signout"' class="small_button" value="Sign out" /></p>
+	{% else %}
+              <p>You are not signed in &nbsp;&nbsp; <input type="button" onclick='window.location.href="/profiles/signin"' class="small_button" value="Sign in" /></p>
+	{% endif %}
+    </div><!-- .account -->
+
     <h1><a href="/">FounderDating</a></h1>
     
     <ul class="tabs first_tab_active">
@@ -80,14 +85,14 @@
         <p>Saar Gur is a partner at Charles River Ventures (CRV). Saar is passionate about discovering and growing early-stage companies and focuses on CRV’s consumer and internet investments. </p>
       </li>
       <li>
-        <a href="http://www.linkedin.com/profile?viewProfile=&key=1074199&trk=tab_pro" title="Jessica Alter" target="_blank"><img alt="Jessica Alter"/>
+        <a href="http://www.linkedin.com/profile?viewProfile=&key=1074199&trk=tab_pro" title="Jessica Alter" target="_blank"><img alt="Jessica Alter"/></a>
         <h3>Jessica Alter</h3>
         <p>Jessica is Founder at Formative Labs and Chief Connector at FounderDating.  She is passionate about helping fellow entrepreneurs find their founder soulmate.</p>
       </li>
 
     </ul>
   
-    <p><a href="/about"><img src="/static/img/sidebar.btn.about_us.png" alt="Follow Us" /></a></p>
+    <p><input type="button" onclick='window.location.href="/about"' class="small_button" value="Follow Us" /></p>
   
   </div><!-- /#who_we_are.sector -->
 
@@ -101,9 +106,8 @@
   
   <div class="gasket">
     
-    <p>&copy; 2011 FounderDating. All rights reserved.</p>
+    <p>&copy; <script>document.write((new Date).getFullYear())</script> Founder Dating. All rights reserved.</p>
 
-    
   </div><!-- /.gasket -->
   
 </div><!-- /#footer -->

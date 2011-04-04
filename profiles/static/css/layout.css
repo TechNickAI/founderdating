@@ -21,6 +21,19 @@ em { font-style: italic; }
 
 .clear { clear: both; }
 
+ul.errorlist {
+    -moz-border-radius: 4px 4px 4px 4px;
+    background-color: #FEDAE0;
+    border: 1px solid #A3181C;
+    color: #A3181C;
+    margin: 5px 0 3px;
+}
+ul.errorlist li {
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 5px 5px 4px;
+}
+
 /* Header
 ----------------------------------------------- */
 #header {
@@ -103,6 +116,38 @@ em { font-style: italic; }
   left: -10px;
   background: #ebebeb;
   padding: 5px;
+}
+
+/* Buttons */
+input[type=submit], input[type=reset], input[type=button] {
+   border-top: 1px solid #9fdaff;
+   background: #151515;
+   background: -webkit-gradient(linear, left top, left bottom, from(#595c5c), to(#151515));
+   background: -moz-linear-gradient(top, #595c5c, #151515);
+   padding: 6.5px 13px;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #dedede;
+   font-size: 12px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   margin-bottom: 5px;
+}
+input[type=submit]:hover, input[type=reset]:hover, input[type=button]:hover {
+   border-top-color: #00bbff;
+   background: #00bbff;
+   color: #ccc;
+   cursor: pointer;
+}
+input[type=submit].small_button, input[type=reset].small_button, input[type=button].small_button {
+   font-size: 10px;
+   padding: 3.5px 7px;
 }
 
 #header ul.tabs li:hover > ul.sub { display: block; }
@@ -463,105 +508,6 @@ em { font-style: italic; }
   margin: 0 0 0 -4px;
 }
 
-/* Content: Request form
------------------------------------------------ */
-#request_form h2 {
-  margin-bottom: 5px;
-  color: #808080;
-}
-
-#request_form input.text {
-  width: 220px;
-  font-size: .9em;
-  padding: 3px;
-}
-
-#request_form textarea {
-  font-size: .9em;
-  padding: 3px;
-  width: 420px;
-  border: solid 1px #ccc;
-}
-
-#request_form ul {
-  margin-left: 10px;
-}
-#request_form ul li {
-  list-style: none;
-}
-
-
-/* Content: Edit Form
------------------------------------------------ */
-#edit_form fieldset {
-  padding: 15px 15px 0 15px;
-  margin-bottom: 15px;
-  border: solid 1px #d9d9d9;
-}
-
-#edit_form fieldset legend {
-  margin-left: -5px;
-  padding: 0 5px 0 5px;
-  font-size: .8em;
-  font-weight: bold;
-  color: #5d5d5d;
-}
-
-#edit_form fieldset legend img {
-  vertical-align: middle;
-  margin-left: 1px;
-  margin-top: -3px;
-}
-
-#edit_form dl dt {
-  clear: both;
-  margin-bottom: 5px;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: .7em;
-  color: #808080;
-}
-
-#edit_form dl dt input { margin-left: 0; }
-
-#edit_form dl dd {
-  margin-bottom: 15px;
-  font-size: .75em;
-  line-height: 1.5em;
-  color: #868686;
-}
-
-#edit_form dl dd ul { margin-left: 15px; }
-
-#edit_form dl dd li {
-  list-style: none;
-  font-size: 100%;
-  color: #868686;
-}
-
-#edit_form dl dd small.note {
-  margin-left: 5px;
-  font-size: .9em;
-  font-style: italic;
-}
-
-#edit_form dl dd input.text {
-  padding: 3px;
-  width: 230px;
-}
-
-
-#edit_form .account_not_linked {
-  margin: 20px 0 35px 0;
-  text-align: center;
-}
-
-#edit_form .account_not_linked p {
-  margin-bottom: 5px;
-  font-size: 1em;
-  color: #868686;
-}
-
 
 /* Connections Block
 ----------------------------------------------- */
@@ -601,18 +547,18 @@ ul#connections_block li p {
 
 /* Signup Form
 ----------------------------------------------- */
-#content .signup_form {
+#content .fdform {
   margin-bottom: 20px;
   border: solid 1px #efefef;
 }
 
-#content .signup_form p {
+#content .fdform p {
   margin: 5px;
   padding: 10px;
   background: #efefef;
 }
 
-#content .signup_form label {
+#content .fdform label {
   display: block;
   text-transform: uppercase;
   font-size: .9em;
@@ -620,7 +566,7 @@ ul#connections_block li p {
   color: #808080;
 }
 
-#content .signup_form input {
+#content .fdform input[type=text], input[type=password]{
   width: 250px;
   padding: 3px;
 }
