@@ -545,20 +545,20 @@ ul#connections_block li p {
 }
 
 
-/* Signup Form
+/* Form
 ----------------------------------------------- */
-#content .fdform {
+form fieldset {
   margin-bottom: 20px;
   border: solid 1px #efefef;
 }
 
-#content .fdform p {
+form fieldset p {
   margin: 5px;
   padding: 10px;
   background: #efefef;
 }
 
-#content .fdform label {
+form fieldset label {
   display: block;
   text-transform: uppercase;
   font-size: .9em;
@@ -566,7 +566,7 @@ ul#connections_block li p {
   color: #808080;
 }
 
-#content .fdform input[type=text], input[type=password]{
+form fieldset input[type=text], input[type=password]{
   width: 250px;
   padding: 3px;
 }

@@ -6,7 +6,7 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
-    <fieldset class="fdform">
+    <fieldset>
         <legend>{% trans "Signin" %}</legend>
         {{ form.non_field_errors }}
         {% for field in form %}
