@@ -143,7 +143,13 @@ INSTALLED_APPS = (
     'cms.plugins.snippet',
     'cms.plugins.video',
     'cms.plugins.inherit',
-    'cmsplugin_facebook'
+    'cmsplugin_facebook',
+
+    # zinnia (blog)
+    'django.contrib.comments',
+    'tagging',
+    'zinnia',
+    'zinnia.plugins'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -202,6 +208,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'cms.context_processors.media',
+    'zinnia.context_processors.media'
 )
 LANGUAGES = [
     ('en', 'English'),

@@ -23,6 +23,10 @@ urlpatterns = patterns('',
 
     # django cms
     url(r'^', include('cms.urls')),
+
+    # Zinnia (blog)
+    url(r'^blog/', include('zinnia.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
 )
 urlpatterns += staticfiles_urlpatterns()
 
