@@ -142,7 +142,8 @@ INSTALLED_APPS = (
     'cms.plugins.picture',
     'cms.plugins.snippet',
     'cms.plugins.video',
-    'cms.plugins.inherit'
+    'cms.plugins.inherit',
+    'cmsplugin_facebook'
 )
 
 # A sample logging configuration. The only tangible logging
