@@ -47,12 +47,12 @@ USE_L10N = False
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = ROOT_PATH + "media"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -100,6 +100,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    # django-cms
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.media.PlaceholderMediaMiddleware',
 )
 
 ROOT_URLCONF = 'fd.urls'
@@ -122,7 +127,14 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'fd.profiles',
-    'social_auth'
+    'social_auth',
+
+    # django-cms
+    'cms',
+    'mptt',
+    'south',
+    'appmedia',
+    'menus'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -170,3 +182,18 @@ LINKEDIN_CONSUMER_KEY    = 'eWfwAKstebfIopyAcCGtw08YcZ1eqkNzhqsNVF9dex_B6bSEIllw
 LINKEDIN_CONSUMER_SECRET = '5X4Ro56g9jJ0vzudCtY7h8nrmMtLVO9uhGvOAPHXPZ-cxYmm3TKWa9UXRf5asWhR'
 SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 LOGIN_ERROR_URL = '/profiles/login-error/'
+
+#django cms
+CMS_TEMPLATES = (
+    ('cms_main.html', 'Main Template'),
+)
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.request',
+    'django.core.context_processors.media',
+    'cms.context_processors.media',
+)
+LANGUAGES = [
+    ('en', 'English'),
+]

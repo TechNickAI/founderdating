@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load cms_tags %}
 {% get_static_prefix as STATIC_PREFIX %}
 
 <html lang="en">
@@ -49,7 +50,8 @@
         {% block content_title %}{% endblock %}
       </div>
       <div class="content">
-        {% block content %}{% endblock %}
+	 {% placeholder base_content %}
+	 {% block base_content%}{% endblock %}
       </div>
     {% endblock %}
  </div><!-- /#content -->
