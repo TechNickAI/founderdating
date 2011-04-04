@@ -121,7 +121,8 @@ INSTALLED_APPS = (
     'userena',
     'guardian',
     'easy_thumbnails',
-    'fd.profiles'
+    'fd.profiles',
+    'social_auth'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -152,6 +153,7 @@ ANONYMOUS_USER_ID = -1
 
 # django-userena
 AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.contrib.linkedin.LinkedinBackend', # social_auth
     'userena.backends.UserenaAuthenticationBackend',
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
@@ -161,3 +163,10 @@ LOGIN_REDIRECT_URL = '/profiles/%(username)s/'
 LOGIN_URL = '/profiles/signin/'
 LOGOUT_URL = '/profiles/signout/'
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+
+# social auth
+LINKEDIN_CONSUMER_KEY    = 'eWfwAKstebfIopyAcCGtw08YcZ1eqkNzhqsNVF9dex_B6bSEIllw2XLJiha1FgBk'
+LINKEDIN_CONSUMER_SECRET = '5X4Ro56g9jJ0vzudCtY7h8nrmMtLVO9uhGvOAPHXPZ-cxYmm3TKWa9UXRf5asWhR'
+SOCIAL_AUTH_ERROR_KEY = 'social_errors'
+LOGIN_ERROR_URL = '/profiles/login-error/'

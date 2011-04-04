@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     
     (r'^profiles/', include('userena.urls')),
     (r'^accounts/', include('userena.urls')),
-    url(r'^internal_admin/', include(admin.site.urls))
+    url(r'', include('social_auth.urls')),
+    url(r'^internal_admin/', include(admin.site.urls)),
+
 )
 urlpatterns += staticfiles_urlpatterns()
