@@ -21,12 +21,13 @@ urlpatterns = patterns('',
     url(r'^internal_admin/', include(admin.site.urls)),
     (r'^' + settings.MEDIA_URL.lstrip('/'), include('appmedia.urls')),
 
-    # django cms
-    url(r'^', include('cms.urls')),
-
     # Zinnia (blog)
     url(r'^blog/', include('zinnia.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
+
+    # django cms
+    url(r'^', include('cms.urls')),
+
 )
 urlpatterns += staticfiles_urlpatterns()
 

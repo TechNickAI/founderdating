@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'userena',
     'guardian',
-    'easy_thumbnails',
+    'easy_thumbnails', # temporarily coment this out when running migrate first time
     'fd.profiles',
     'social_auth',
 

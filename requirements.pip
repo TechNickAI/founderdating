@@ -1,0 +1,11 @@
+# PIL installed with sudo apt-get install python-imaging
+django # 1.3
+django-userena #1.0.0
+django-social-auth # 0.3.10
+django-cms # 2.1.3
+django-appmedia #1.0.1
+cmsplugin-facebook #0.2.0
+django-tagging # 0.3.1
+django-blog-zinnia # 0.8
+# Note that zinnia installs a newwer version of mptt that breaks stuff.
+django-mptt==0.3.0
