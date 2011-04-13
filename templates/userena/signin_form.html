@@ -1,13 +1,17 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Signin" %}{% endblock %}
+{% block title %}Sign In to Founder Dating{% endblock %}
 
 {% block content %}
+<a href="/login/linkedin"><img src="/static/img/linkedin_login.png" border="0"/></a>
+<p>
+<h2>- OR -</h2>
+<p>
 <form action="" method="post">
     {% csrf_token %}
     <fieldset>
-        <legend>{% trans "Signin" %}</legend>
+        <legend>Sign in with your Founder Dating account</legend>
         {{ form.non_field_errors }}
         {% for field in form %}
         {{ field.errors }}
