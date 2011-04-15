@@ -16,7 +16,17 @@
   <div class="gasket">
     <div class="account">
 	{% if user.is_authenticated %}
-              <p>Signed in as {{user.username}} &nbsp;&nbsp; <input type="button" onclick='window.location.href="/profiles/signout"' class="small_button" value="Sign out" /></p>
+              <p>Signed in as 
+		{%if user.first_name %}
+		  {{user.first_name}} {{user.last_name}}
+		{% else %}
+		  {% if user.email %}
+		    {{user.email}}
+		  {% else %}
+		    {{user.username}}
+		  {% endif %}
+		{% endif %}
+		&nbsp;&nbsp; <input type="button" onclick='window.location.href="/profiles/signout"' class="small_button" value="Sign out" /></p>
 	{% else %}
               <p>You are not signed in &nbsp;&nbsp; <input type="button" onclick='window.location.href="/profiles/signin"' class="small_button" value="Sign in" /></p>
 	{% endif %}
