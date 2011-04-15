@@ -186,7 +186,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 AUTH_PROFILE_MODULE = "profiles.FdProfile"
-LOGIN_REDIRECT_URL = '/profiles/%(username)s/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/profiles/signin/'
 LOGOUT_URL = '/profiles/signout/'
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
