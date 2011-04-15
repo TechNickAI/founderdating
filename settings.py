@@ -6,7 +6,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     ('Nick Sullivan', 'nick@sullivanflock.com'),
 )
 
 MANAGERS = ADMINS
@@ -196,7 +196,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 LINKEDIN_CONSUMER_KEY    = 'eWfwAKstebfIopyAcCGtw08YcZ1eqkNzhqsNVF9dex_B6bSEIllw2XLJiha1FgBk'
 LINKEDIN_CONSUMER_SECRET = '5X4Ro56g9jJ0vzudCtY7h8nrmMtLVO9uhGvOAPHXPZ-cxYmm3TKWa9UXRf5asWhR'
 SOCIAL_AUTH_ERROR_KEY = 'social_errors'
-LOGIN_ERROR_URL = '/profiles/login-error/'
+LOGIN_ERROR_URL = '/profiles/signin/?login_error'
 
 #django cms
 CMS_TEMPLATES = (
@@ -208,7 +208,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'cms.context_processors.media',
-    'zinnia.context_processors.media'
+    'zinnia.context_processors.media',
+    'profiles.context_processors.fd_context'
 )
 LANGUAGES = [
     ('en', 'English'),
