@@ -3,11 +3,26 @@ from django.db import models
 from userena.models import UserenaBaseProfile
 
 class FdProfile(UserenaBaseProfile):
-    username   = models.CharField(max_length=100)
-    last_login = models.DateTimeField(blank=True)
-    is_active  = models.BooleanField(default=True)
+    event = models.ForeignKey('Event', null=True)
+
+class Event(models.Model):
+    event_date = models.DateField()
+    event_location = models.ForeignKey('EventLocation')
+
+    def __unicode__(self):
+        return '%s - %s' % (self.event_location.display, self.event_date)
 
 
+class EventLocation(models.Model):
+    display = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2)
+    country = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.display
+
+### END of traditional models definition. Should this be moved to __init__.py?
 # Listen for new accounts/updates via social auth and update the FdProfile
 from social_auth.signals import pre_update
 from social_auth.backends.contrib.linkedin import LinkedinBackend
