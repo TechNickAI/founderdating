@@ -36,10 +36,12 @@
     
     <ul class="tabs first_tab_active">
               <li class="active"><a href="/">Home</a></li>
-              <li><a href="/upcoming">Upcoming</a><ul class="sub">
-		<li><a href="/upcoming/sanfrancisco">San Francisco</a></li>
-		<li><a href="/upcoming/seattle">Seattle</a></li>
-</ul></li>
+              <li><a href="/upcoming">Upcoming</a>
+		<ul class="sub">
+		  {% for loc in event_locations %}
+		  <li><a href="/upcoming/{{loc.id}}">{{loc.display}}</a></li>
+		  {% endfor %}
+		</ul>
               <li><a href="/attend">Attend</a></li>
 
               <li><a href="/about">About</a></li>
