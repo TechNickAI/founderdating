@@ -12,7 +12,7 @@
   {% block meta %}{% endblock %}
 </head>
 <body>
-<div id="header">
+<div id="fd_header">
   <div class="gasket">
     <div class="account">
 	{% if user.is_authenticated %}
@@ -53,7 +53,7 @@
   </div><!-- /.gasket -->
 
   
-</div><!-- /#header -->
+</div><!-- /#fd_header -->
 
 <div id="main" class="gasket">
 
@@ -64,7 +64,7 @@
       </div>
       <div class="content">
 	 {% placeholder base_content %}
-	 {% block content%}{% endblock %}
+	 {% block fd_content%}{% endblock fd_content%}
       </div>
     {% endblock %}
  </div><!-- /#content -->
@@ -75,7 +75,7 @@
   
 </div><!-- /#main.gasket -->
 
-<div id="footer">
+<div id="fd_footer">
   
   <div class="gasket">
     
@@ -83,7 +83,7 @@
 
   </div><!-- /.gasket -->
   
-</div><!-- /#footer -->
+</div><!-- /#fd_footer -->
 
 </body>
 </html>

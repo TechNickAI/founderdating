@@ -36,46 +36,46 @@ ul.errorlist li {
 
 /* Header
 ----------------------------------------------- */
-#header {
+#fd_header {
   margin-bottom: 20px;
   background: #212121 url(/static/img/header.slope.png) no-repeat 50% 0;
   border-bottom: solid 3px #ebebeb;
 }
-#header .gasket { width: 830px; }
+#fd_header .gasket { width: 830px; }
 
-#header .account {
+#fd_header .account {
   margin-bottom: 15px;
   height: 43px;
 }
 
-#header .account p {
+#fd_header .account p {
   padding-top: 11px;
   text-align: right;
   color: #6b6b6b;
   font-size: .7em;
 }
 
-#header .account p img {
+#fd_header .account p img {
   position: relative;
   top: -2px;
   vertical-align: middle;
 }
 
-#header h1 {
+#fd_header h1 {
   margin-bottom: 15px;
   width: 351px;
   height: 52px;
   background: url(/static/img/header.brand.png) no-repeat;
 }
 
-#header h1 a {
+#fd_header h1 a {
   display: block;
   width: 351px;
   height: 52px;
   text-indent: -2000px;
 }
 
-#header ul.tabs {
+#fd_header ul.tabs {
   position: absolute;
   right: 0;
   top: 74px;
@@ -83,16 +83,16 @@ ul.errorlist li {
   border-top: solid 6px #00BDFF;
 }
 
-#header ul.tabs.first_tab_active { padding-left: 0; }
+#fd_header ul.tabs.first_tab_active { padding-left: 0; }
 
-#header ul.tabs li {
+#fd_header ul.tabs li {
   position: relative;
   float: left;
   font-size: .95em;
   margin-right: 15px;
 }
 
-#header ul.tabs li a {
+#fd_header ul.tabs li a {
   padding: 15px 0 0 0;
   height: 30px;
   display: block;
@@ -100,15 +100,15 @@ ul.errorlist li {
   color: #fff;
 }
 
-#header ul.tabs li.active a {
+#fd_header ul.tabs li.active a {
   height: 36px;
   background: #00BDFF;
   padding: 15px 15px 0 15px;
 }
 
-#header ul.tabs.last_tab_active li.active { margin-right: 0; }
+#fd_header ul.tabs.last_tab_active li.active { margin-right: 0; }
 
-#header ul.tabs ul.sub {
+#fd_header ul.tabs ul.sub {
   display: none;
   position: absolute;
   z-index: 100;
@@ -150,16 +150,16 @@ input[type=submit].small_button, input[type=reset].small_button, input[type=butt
    padding: 3.5px 7px;
 }
 
-#header ul.tabs li:hover > ul.sub { display: block; }
-#header ul.tabs li.active:hover > ul.sub { display: none; }
+#fd_header ul.tabs li:hover > ul.sub { display: block; }
+#fd_header ul.tabs li.active:hover > ul.sub { display: none; }
 
-#header ul.tabs li ul.sub li {
+#fd_header ul.tabs li ul.sub li {
   padding: 0;
   margin: 0;
   float: none;
 }
 
-#header ul.tabs li ul.sub li a {
+#fd_header ul.tabs li ul.sub li a {
   display: block;
   width: 120px;
   height: auto;
@@ -170,7 +170,7 @@ input[type=submit].small_button, input[type=reset].small_button, input[type=butt
   background: #ebebeb;
 }
 
-#header ul.tabs li ul.sub li a:hover {
+#fd_header ul.tabs li ul.sub li a:hover {
   background: #191919;
   border-bottom: solid 1px #191919;
   color: #fff;
@@ -727,18 +727,18 @@ form fieldset input[type=text], input[type=password]{
 
 /* Footer
 ----------------------------------------------- */
-#footer {
+#fd_footer {
   clear: both;
   background: #191919;
   border-bottom: solid 10px #00BDFF;
 }
 
-#footer .gasket {
+#fd_footer .gasket {
   width: 830px;
   padding: 30px 0 30px 0;
 }
 
-#footer p {
+#fd_footer p {
   font-size: .75em;
   color: #919191;
 }
