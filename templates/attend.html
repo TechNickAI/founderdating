@@ -1,0 +1,133 @@
+{% extends 'base.html'%}
+
+{% block fd_content %}
+
+<form action="/application" method="post">
+  
+  <div id="request_form">
+    
+    <h2><label for="f_name">Name</label></h2>
+    <p><input type="text" id="f_name" name="name" class="text" value="" /></p>
+    
+    <h2><label for="f_email">Email address</label></h2>
+    <p><input type="text" id="f_email" name="email" class="text" value="" /></p>
+    
+    <h2><label for="f_event">Event</label></h2>
+    <ul>
+      <li><label><input type="radio" name="event" class="radio" value="San Francisco"  />  San Francisco</label></li>
+<li><label><input type="radio" name="event" class="radio" value="Seattle"  />  Seattle</label></li>
+    </ul>
+    
+    <h2><label for="f_skillset">Specify your primary skillsets</label></h2>
+    
+    <ul>
+      <li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Engineering"  /> Engineering</label></li>
+<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="UI/Design"  /> UI/Design</label></li>
+<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Marketing"  /> Marketing</label></li>
+<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Business Development"  /> Business Development</label></li>
+<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Product"  /> Product</label></li>
+<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Enterprise Sales"  /> Enterprise Sales</label></li>
+<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Ad Sales"  /> Ad Sales</label></li>
+<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Fundraising"  /> Fundraising</label></li>
+    </ul>
+    
+    <h2><label for="f_past_experience">Please tell us about your previous experience</label></h2>
+    <p><textarea id="f_past_experience" name="past_experience" cols="10" rows="10"></textarea></p>
+    
+    <h2><label for="f_linkedin">Linkedin Profile link</label></h2>
+    <p><input type="text" id="f_linkedin" name="linkedin" class="text" value="" /></p>
+    
+    <h2><label for="f_bring">What do you think you bring to a founding team</label></h2>
+    <p><textarea id="f_bring" name="bring" cols="10" rows="10"></textarea></p>
+    
+    <h2><label for="f_classify">I would classify myself as the following</label></h2>
+    <ul>
+      <li><label><input type="radio" name="classify" class="radio" value="I have an idea that I'm committed to"  /> I have an idea that I'm committed to</label></li>
+<li><label><input type="radio" name="classify" class="radio" value="I have and idea, but I'm also open to exploring other ideas"  /> I have and idea, but I'm also open to exploring other ideas</label></li>
+<li><label><input type="radio" name="classify" class="radio" value="I don't yet have an idea"  /> I don't yet have an idea</label></li>
+    </ul>
+    
+    <h2><label for="f_interest">Areas of interest</label></h2>
+    <ul>
+      <li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Video"  /> Video</label></li>
+<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Enterprise software"  /> Enterprise software</label></li>
+<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Real-time feeds"  /> Real-time feeds</label></li>
+<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Mobile"  /> Mobile</label></li>
+<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Advertising"  /> Advertising</label></li>
+<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Commerce"  /> Commerce</label></li>
+<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Recommendation engines"  /> Recommendation engines</label></li>
+    </ul>
+    
+    <h2><label for="f_areas_of_interest_more">Areas of Interest (Please add any additional interests you have)</label></h2>
+    <p><input type="text" id="f_areas_of_interest_more" name="areas_of_interest_more" class="text" value="" maxlength="100" /></p>
+    
+    <h2><label for="f_start">When can you start?</label></h2>
+    <ul>
+      <li><label><input type="radio" name="can_start" class="radio" value="Immediately"  /> Immediately</label></li>
+<li><label><input type="radio" name="can_start" class="radio" value="Part-time now, full-time soon"  /> Part-time now, full-time soon</label></li>
+<li><label><input type="radio" name="can_start" class="radio" value="Part-time now, full-time if it takes off"  /> Part-time now, full-time if it takes off</label></li>
+<li><label><input type="radio" name="can_start" class="radio" value="I don’t have much for the next several months"  /> I don’t have much for the next several months</label></li>
+    </ul>
+    
+    <h2><label for="f_partner_skillsets">I’m looking for a partner with the following skillsets</label></h2>
+    <ul>
+      <li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Engineering"  /> Engineering</label></li>
+<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="UI/Design"  /> UI/Design</label></li>
+<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Marketing"  /> Marketing</label></li>
+<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Business Development"  /> Business Development</label></li>
+<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Product"  /> Product</label></li>
+<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Enterprise Sales"  /> Enterprise Sales</label></li>
+<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Ad Sales"  /> Ad Sales</label></li>
+<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Fundraising"  /> Fundraising</label></li>
+    </ul>
+    
+    <h2><label for="f_building">Please tell us about what you&rsquo;re building or interested in. the more detail the better able we are to match you with potential partners.</label></h2>
+    <p><textarea id="f_building" name="building" cols="10" rows="10"></textarea></p>
+    
+    <h2><label>People who would recommend you</label></h2>
+    
+    <p style="margin-bottom:2px;color:#666">Note: these should be people you've worked with in the past</p>
+    
+    <p style="margin:0">
+      <div style="float:left; width:240px;">
+        <label style="font-size:.7em;color:#666;">Name</label>
+        <input type="text" name="recommend[1][name]" class="text" style="font-size:.7em" value="" />
+      </div>
+      <div style="float:left; width:240px;">
+        <label style="font-size:.7em;color:#666;">Email</label>
+        <input type="text" name="recommend[1][email]" class="text" style="font-size:.7em" value="" />
+      </div>
+      <div class="clear"></div>
+    </p>
+    
+    <p>
+      <div style="float:left; width:240px;">
+        <label style="font-size:.7em;color:#666;">Name</label>
+        <input type="text" name="recommend[2][name]" class="text" style="font-size:.7em" value="" />
+      </div>
+      <div style="float:left; width:240px;">
+        <label style="font-size:.7em;color:#666;">Email</label>
+        <input type="text" name="recommend[2][email]" class="text" style="font-size:.7em" value="" />
+      </div>
+      <div class="clear"></div>
+    </p>
+    
+    <p>
+      <div style="float:left; width:240px;">
+        <label style="font-size:.7em;color:#666;">Name</label>
+        <input type="text" name="recommend[3][name]" class="text" style="font-size:.7em" value="" />
+      </div>
+      <div style="float:left; width:240px;">
+        <label style="font-size:.7em;color:#666;">Email</label>
+        <input type="text" name="recommend[3][email]" class="text" style="font-size:.7em" value="" />
+      </div>
+      <div class="clear"></div>
+    </p>
+    
+    <p><input type="submit" /></p>
+    
+  </div>
+  
+</form>  
+{% endblock fd_content %}
+

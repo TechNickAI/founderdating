@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     (r'^profiles/', include('userena.urls')),
     (r'^accounts/', include('userena.urls')),
 
+    # Application process
+    (r'^attend', 'fd.profiles.views.attend'),
+
     # social auth for linkedin hookup
     url(r'', include('social_auth.urls')),
 
