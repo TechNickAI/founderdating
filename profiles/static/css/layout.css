@@ -264,7 +264,6 @@ input[type=submit].small_button, input[type=reset].small_button, input[type=butt
 
 #content ul li {
   margin-bottom: 3px;
-  list-style: square;
   font-size: .75em;
   line-height: 1.5em;
   color: #464646;
