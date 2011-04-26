@@ -39,6 +39,8 @@ class LinkedinProfile(models.Model):
 class Event(models.Model):
     event_date = models.DateField()
     event_location = models.ForeignKey('EventLocation')
+    description = models.TextField(max_length=1000)
+    apply_deadline = models.DateField()
 
     def __unicode__(self):
         return '%s - %s' % (self.event_location.display, self.event_date)
