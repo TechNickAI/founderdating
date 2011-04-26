@@ -14,8 +14,9 @@
     
     <h2><label for="f_event">Event</label></h2>
     <ul>
-      <li><label><input type="radio" name="event" class="radio" value="San Francisco"  />  San Francisco</label></li>
-<li><label><input type="radio" name="event" class="radio" value="Seattle"  />  Seattle</label></li>
+      {% for e in event_locations %}
+	<li><label><input type="radio" name="event" class="radio" value="{{e.id}}"  />{{e.display}}</label></li>
+      {% endfor %}
     </ul>
     
     <h2><label for="f_skillset">Specify your primary skillsets</label></h2>
