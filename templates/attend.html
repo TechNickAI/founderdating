@@ -14,8 +14,8 @@
     
     <h2><label for="f_event">Event</label></h2>
     <ul>
-      {% for e in event_locations %}
-	<li><label><input type="radio" name="event" class="radio" value="{{e.id}}"  />{{e.display}}</label></li>
+      {% for e in upcoming_events %}
+	<li><label><input type="radio" name="event" class="radio" value="{{e.id}}"/>{{e.event_location.display}} - {{e.event_date}}</label></li>
       {% endfor %}
     </ul>
     
