@@ -1,4 +1,5 @@
-from fd.profiles.models import EventLocation
+from fd.profiles.models import Event, EventLocation
+import datetime
 
 def fd_context(request):
     context = {}
@@ -7,4 +8,7 @@ def fd_context(request):
 
     # Bring in the event locations for the menu
     context["event_locations"] = EventLocation.objects.all()
+
+    # Upcoming events for whever ever they are needed
+    context["upcoming_events"] = Event.objects.filter(event_date__gte=datetime.datetime.now())
     return context

@@ -6,16 +6,16 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'fd.views.home', name='home'),
-    # url(r'^fd/', include('fd.foo.urls')),
-    
+
     # basic account creation
     (r'^profiles/', include('userena.urls')),
     (r'^accounts/', include('userena.urls')),
 
     # Application process
     (r'^attend', 'fd.profiles.views.attend'),
+
+    # List upcoming events
+    (r'^upcoming', 'fd.profiles.views.events'),
 
     # social auth for linkedin hookup
     url(r'', include('social_auth.urls')),

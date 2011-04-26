@@ -473,38 +473,38 @@ input[type=submit].small_button, input[type=reset].small_button, input[type=butt
 
 /* Content: Next Event Callout
 ----------------------------------------------- */
-#next_event {
+.event {
   margin-bottom: 25px;
   border: solid 5px #efefef;
 }
 
-#next_event .inner {
+.event .inner {
   padding: 15px;
   background: #fff url(/static/img/home.next_event.glow.png) no-repeat 100% 0;
   border: solid 1px #d4d4d4;
 }
 
-#next_event h2 {
+.event h2 {
   margin-bottom: 5px;
   color: #6c6c6c;
 }
 
-#next_event img.main_photo {
+.event img.main_photo {
   margin-right: 15px;
   float: left;
 }
 
-#next_event h3 {
+.event h3 {
   margin-bottom: 5px;
   font-family: times, Times New Roman, times-roman, georgia, serif;
   font-size: 1.8em;
 }
 
-#next_event p {
+.event p {
   font-size: .7em;
 }
 
-#next_event p.button {
+.event p.button {
   margin: 0 0 0 -4px;
 }
 

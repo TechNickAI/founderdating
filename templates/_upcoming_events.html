@@ -1,0 +1,12 @@
+<h3>Upcoming events</h3>
+{% for e in upcoming_events %}
+<div class="event">
+  <div class="inner">
+    <h2>Next Event</h2>
+    <h3>{{ e.event_location.display }}  – {{ e.event_date}}</h3>
+    <h2>Apply by {{e.apply_deadline }}</h2>
+    <p>{{e.description}}</p>
+    <input type="button" value="Attend This Event" onclick="window.location='/attend?event={{e.id}}'"/>
+  </div>
+</div><!-- .event -->
+{%endfor%}
