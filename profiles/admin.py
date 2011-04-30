@@ -1,5 +1,5 @@
 from django.contrib import admin
-from profiles.models import Event, EventLocation, LinkedinProfile, Skillset
+from profiles.models import Interest, Event, EventLocation, LinkedinProfile, Skillset
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('event_location', 'event_date')
@@ -21,3 +21,9 @@ admin.site.register(Skillset, SkillsetAdmin)
 class LinkedinProfileAdmin(admin.ModelAdmin):
     pass
 admin.site.register(LinkedinProfile, LinkedinProfileAdmin)
+
+class InterestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'ord')
+    ordering = ["ord"]
+    pass
+admin.site.register(Interest, InterestAdmin)

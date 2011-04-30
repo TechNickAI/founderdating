@@ -1,4 +1,4 @@
-from fd.profiles.models import Event, EventLocation, Skillset
+from fd.profiles.models import Interest, Event, EventLocation, Skillset
 import datetime
 
 def fd_context(request):
@@ -14,5 +14,8 @@ def fd_context(request):
 
     # Skillsets for whever ever they are needed
     context["skillsets"] = Skillset.objects.all().order_by("ord")
+
+    # Interest for whever ever they are needed
+    context["interests"] = Interest.objects.all().order_by("ord")
 
     return context

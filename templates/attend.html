@@ -48,13 +48,9 @@
     
     <h2><label for="f_interest">Areas of interest</label></h2>
     <ul>
-      <li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Video"  /> Video</label></li>
-<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Enterprise software"  /> Enterprise software</label></li>
-<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Real-time feeds"  /> Real-time feeds</label></li>
-<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Mobile"  /> Mobile</label></li>
-<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Advertising"  /> Advertising</label></li>
-<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Commerce"  /> Commerce</label></li>
-<li><label><input type="checkbox" name="areas_of_interest[]" class="check" value="Recommendation engines"  /> Recommendation engines</label></li>
+      {% for interest in interests %}
+	<li><input type="checkbox" name="areas_of_interest" class="check" value="{{interest}}"/>{{interest}}</li>
+      {% endfor %}
     </ul>
     
     <h2><label for="f_areas_of_interest_more">Areas of Interest (Please add any additional interests you have)</label></h2>

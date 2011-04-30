@@ -62,6 +62,13 @@ class Skillset(models.Model):
     def __unicode__(self):
         return self.name
 
+class Interest(models.Model):
+    name = models.CharField(max_length=100)
+    ord = models.PositiveSmallIntegerField()
+
+    def __unicode__(self):
+        return self.name
+
 
 
 ### END of traditional models definition. Should this be moved to __init__.py?
