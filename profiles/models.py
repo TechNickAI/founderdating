@@ -55,6 +55,15 @@ class EventLocation(models.Model):
     def __unicode__(self):
         return self.display
 
+class Skillset(models.Model):
+    name = models.CharField(max_length=100)
+    ord = models.PositiveSmallIntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+
+
 ### END of traditional models definition. Should this be moved to __init__.py?
 # Listen for new accounts/updates via social auth and update the FdProfile
 from social_auth.signals import pre_update

@@ -7,29 +7,27 @@
   <div id="request_form">
     
     <h2><label for="f_name">Name</label></h2>
-    <p><input type="text" id="f_name" name="name" class="text" value="" /></p>
+    <p><input type="text" id="f_name" name="name" class="text" value="{%if user.first_name %}{{user.first_name}} {{user.last_name}}{%endif%}"/></p>
     
     <h2><label for="f_email">Email address</label></h2>
-    <p><input type="text" id="f_email" name="email" class="text" value="" /></p>
+    <p><input type="text" id="f_email" name="email" class="text" value="{{user.email}}" /></p>
     
     <h2><label for="f_event">Event</label></h2>
     <ul>
       {% for e in upcoming_events %}
 	<li><label><input type="radio" name="event" class="radio" value="{{e.id}}"/>{{e.event_location.display}} - {{e.event_date}}</label></li>
       {% endfor %}
+      {% if get.event %}
+        <script>$('input[name=event][value="{{get.event}}"]').attr("checked", "true");</script>
+      {% endif %}
     </ul>
     
     <h2><label for="f_skillset">Specify your primary skillsets</label></h2>
     
     <ul>
-      <li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Engineering"  /> Engineering</label></li>
-<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="UI/Design"  /> UI/Design</label></li>
-<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Marketing"  /> Marketing</label></li>
-<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Business Development"  /> Business Development</label></li>
-<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Product"  /> Product</label></li>
-<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Enterprise Sales"  /> Enterprise Sales</label></li>
-<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Ad Sales"  /> Ad Sales</label></li>
-<li><label><input type="checkbox" name="primary_skillsets[]" class="check" value="Fundraising"  /> Fundraising</label></li>
+      {% for skill in skillsets %}
+        <li><input type="checkbox" name="primary_skillsets" class="check" value="{{skill}}"/>{{skill}}</li>
+      {% endfor %}
     </ul>
     
     <h2><label for="f_past_experience">Please tell us about your previous experience</label></h2>
@@ -72,14 +70,9 @@
     
     <h2><label for="f_partner_skillsets">I’m looking for a partner with the following skillsets</label></h2>
     <ul>
-      <li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Engineering"  /> Engineering</label></li>
-<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="UI/Design"  /> UI/Design</label></li>
-<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Marketing"  /> Marketing</label></li>
-<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Business Development"  /> Business Development</label></li>
-<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Product"  /> Product</label></li>
-<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Enterprise Sales"  /> Enterprise Sales</label></li>
-<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Ad Sales"  /> Ad Sales</label></li>
-<li><label><input type="checkbox" name="partner_skillsets[]" class="check" value="Fundraising"  /> Fundraising</label></li>
+      {% for skill in skillsets %}
+        <li><input type="checkbox" name="partner_skillsets" class="check" value="{{skill}}"/>{{skill}}</li>
+      {% endfor %}
     </ul>
     
     <h2><label for="f_building">Please tell us about what you&rsquo;re building or interested in. the more detail the better able we are to match you with potential partners.</label></h2>
