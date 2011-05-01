@@ -33,6 +33,12 @@ class FdProfile(UserenaBaseProfile):
     linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
 
+class Recommendation(models.Model):
+    fdprofile = models.ForeignKey('FdProfile')
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    
+
 class LinkedinProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
