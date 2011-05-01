@@ -24,11 +24,13 @@ class FdProfile(UserenaBaseProfile):
 
     bring_skillsets_json = models.CharField(max_length=255, blank=True, null=True)
     need_skillsets_json = models.CharField(max_length=255, blank=True, null=True)
+    interests_json = models.CharField(max_length=255, blank=True, null=True)
     past_experience_blurb = models.TextField(blank=True, null=True)
     bring_blurb = models.TextField(blank=True, null=True)
     can_start = models.CharField(max_length=25, choices = START_CHOICES, blank=True, null=True)
     idea_status = models.CharField(max_length=25, choices = IDEA_STATUS_CHOICES, blank=True, null=True)
     event_status = models.CharField(max_length=25, choices =  EVENT_STATUS_CHOICES, default = 'Pending')
+    linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
 
 class LinkedinProfile(models.Model):
