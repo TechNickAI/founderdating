@@ -19,6 +19,9 @@ class FdProfile(UserenaBaseProfile):
         ('denied', 'Denied')
     )
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+
     bring_skillsets_json = models.CharField(max_length=255, blank=True, null=True)
     need_skillsets_json = models.CharField(max_length=255, blank=True, null=True)
     past_experience_blurb = models.TextField(blank=True, null=True)
@@ -29,6 +32,8 @@ class FdProfile(UserenaBaseProfile):
     event = models.ForeignKey('Event', null=True, blank=True)
 
 class LinkedinProfile(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     fd_profile = models.OneToOneField("FdProfile")
     oauth_object = models.TextField(max_length=500)
     profile_raw = models.TextField()
