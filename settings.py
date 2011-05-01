@@ -2,7 +2,7 @@
 import os
 
 ROOT_PATH = os.path.dirname(__file__)
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -11,12 +11,13 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# mysql> grant all on founderdating.* to founderdating identified by 'cofounder';
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'founderdating',                      # Or path to database file if using sqlite3.
+        'USER': 'founderdating',                      # Not used with sqlite3.
+        'PASSWORD': 'cofounder',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -223,3 +224,37 @@ CMS_SHOW_END_DATE = True
 # SEO fields in advanced settings
 CMS_SEO_FIELDS = True
 
+APPEND_SLASH = False # don't redirect to $request/
+
+# files for caching
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/cache/django',
+    }
+}
+# Use memcached for sessions
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+
+# Toggle settings based on environment
+# Tip: Set this before starting the django dev server:
+# export FD_ENVIRONMENT=dev 
+ENVIRONMENT = os.environ.get("FD_ENVIRONMENT", "dev")
+
+if ENVIRONMENT == "dev":
+    DEBUG = True
+    DATABASES['default']['NAME'] = "founderdating_dev"
+
+elif ENVIRONMENT == "sqlite":
+    DEBUG = True
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'dev.db',                      # Or path to database file if using sqlite3.
+            'USER': '',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
