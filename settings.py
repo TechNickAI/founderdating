@@ -68,7 +68,7 @@ STATIC_URL = '/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = '/static_admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -230,7 +230,7 @@ APPEND_SLASH = False # don't redirect to $request/
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/cache/django',
+        'LOCATION': '/var/tmp/django_cache',
     }
 }
 # Use memcached for sessions
