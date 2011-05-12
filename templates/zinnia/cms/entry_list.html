@@ -1,0 +1,10 @@
+{% load i18n %}
+<dl class="recent_posts">
+  {% for entry in entries %}
+    <dt>
+    <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
+    <dd>{{entry.excerpt|safe}}[...]</dd>
+  {% empty %}
+    {% trans "No entries yet." %}
+  </li>
+  {% endfor %}
