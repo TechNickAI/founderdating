@@ -6,7 +6,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Nick Sullivan', 'nick@sullivanflock.com'),
+     ('Your Name', 'your@example.com'),
 )
 
 MANAGERS = ADMINS
@@ -188,7 +188,6 @@ AUTH_PROFILE_MODULE = "profiles.FdProfile"
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/profiles/signin/'
 LOGOUT_URL = '/profiles/signout/'
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 
 # social auth
