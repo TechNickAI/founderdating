@@ -135,14 +135,14 @@ INSTALLED_APPS = (
     'appmedia',
     'menus',
     'cms.plugins.text',
-    'cms.plugins.twitter',
+    #'cms.plugins.twitter',
     'cms.plugins.link',
     'cms.plugins.file',
     'cms.plugins.picture',
     'cms.plugins.snippet',
     'cms.plugins.video',
     'cms.plugins.inherit',
-    'cmsplugin_facebook',
+    #'cmsplugin_facebook',
 
     # zinnia (blog)
     'django.contrib.comments',
