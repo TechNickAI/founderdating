@@ -11,18 +11,15 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-# mysql> grant all on founderdating.* to founderdating identified by 'cofounder';
-DATABASES = {
+DATABASES = { 
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'founderdating',                      # Or path to database file if using sqlite3.
-        'USER': 'founderdating',                      # Not used with sqlite3.
-        'PASSWORD': 'cofounder',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'. 
+        'NAME': 'dev.db',                      # Or path to database file if using sqlite3. 
+        'USER': '',                      # Not used with sqlite3. 
+        'PASSWORD': '',                  # Not used with sqlite3.             'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3. 
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3. 
+    } 
 }
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -86,7 +83,8 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '-51-3fijk9)t==c-o7wp5!)=4(dp$16tnr_wjk(@cbi#spp46r'
+# You should override in settings_local
+SECRET_KEY = 'xxxxxxxxx'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -194,10 +192,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 
 # social auth
-LINKEDIN_CONSUMER_KEY    = 'eWfwAKstebfIopyAcCGtw08YcZ1eqkNzhqsNVF9dex_B6bSEIllw2XLJiha1FgBk'
-LINKEDIN_CONSUMER_SECRET = '5X4Ro56g9jJ0vzudCtY7h8nrmMtLVO9uhGvOAPHXPZ-cxYmm3TKWa9UXRf5asWhR'
 SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 LOGIN_ERROR_URL = '/profiles/signin/?login_error'
+# You should override in settins_local
+LINKEDIN_CONSUMER_KEY    = 'xxxxxxxxxx'
+LINKEDIN_CONSUMER_SECRET = 'xxxxxxxx'
 
 #django cms
 CMS_TEMPLATES = (
@@ -236,25 +235,5 @@ CACHES = {
 # Use memcached for sessions
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
-
-# Toggle settings based on environment
-# Tip: Set this before starting the django dev server:
-# export FD_ENVIRONMENT=dev 
-ENVIRONMENT = os.environ.get("FD_ENVIRONMENT", "dev")
-
-if ENVIRONMENT == "dev":
-    DEBUG = True
-    DATABASES['default']['NAME'] = "founderdating_dev"
-
-elif ENVIRONMENT == "sqlite":
-    DEBUG = True
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'dev.db',                      # Or path to database file if using sqlite3.
-            'USER': '',                      # Not used with sqlite3.
-            'PASSWORD': '',                  # Not used with sqlite3.
-            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-        }
-    }
+# Specify all your settings in a file named local_settings
+from local_settings import *
