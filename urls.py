@@ -2,10 +2,19 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.conf import settings
+from os import path
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
+
+    # Static content
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': path.join(settings.ROOT_PATH, 'profiles', 'static')}),
+    (r'^(favicon.ico)', 'django.views.static.serve',
+        {'document_root' : path.join(settings.ROOT_PATH, 'profiles', 'static', 'images')}),
+    (r'^(robots.txt)', 'django.views.static.serve',
+        {'document_root' : path.join(settings.ROOT_PATH, 'profiles', 'static')}),
 
     # basic account creation
     (r'^profiles/', include('userena.urls')),
