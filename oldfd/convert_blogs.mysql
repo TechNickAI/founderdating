@@ -1,0 +1,9 @@
+USE founderdating;
+TRUNCATE TABLE zinnia_entry_sites;
+TRUNCATE TABLE zinnia_entry_authors;
+TRUNCATE TABLE zinnia_entry;
+INSERT INTO zinnia_entry SELECT 2, post_modified, 1, '', '', post_title, substring(post_content, 1, 450), post_name, post_content, '2042-03-15 00:00:00', post_date, post_date, ID, 1, 0, '', 'zinnia/entry_detail.html', 0
+FROM oldfd.wp_posts WHERE post_status='publish' ORDER BY post_date;
+
+INSERT INTO zinnia_entry_sites SELECT NULL, id, 1 FROM zinnia_entry;
+INSERT INTO zinnia_entry_authors SELECT null, id, 2 from zinnia_entry;
