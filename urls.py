@@ -31,6 +31,8 @@ urlpatterns = patterns('',
 
     # django admin
     url(r'^internal_admin/', include(admin.site.urls)),
+    (r'^static_admin/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.ROOT_PATH + '/../lib/python2.6/site-packages/django/contrib/admin/media/'}),
     (r'^' + settings.MEDIA_URL.lstrip('/'), include('appmedia.urls')),
 
     # Zinnia (blog)
