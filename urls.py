@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': path.join(settings.ROOT_PATH, 'profiles', 'static')}),
     (r'^(favicon.ico)', 'django.views.static.serve',
-        {'document_root' : path.join(settings.ROOT_PATH, 'profiles', 'static', 'images')}),
+        {'document_root' : path.join(settings.ROOT_PATH, 'profiles', 'static', 'img')}),
     (r'^(robots.txt)', 'django.views.static.serve',
         {'document_root' : path.join(settings.ROOT_PATH, 'profiles', 'static')}),
 
