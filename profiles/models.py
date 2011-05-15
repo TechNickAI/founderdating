@@ -48,6 +48,7 @@ class LinkedinProfile(models.Model):
     profile_picture = models.URLField(null=True, blank=True)
     profile_location = models.CharField(max_length=100)
     profile_industry = models.CharField(max_length=100)
+    connections_raw = models.TextField()
 
 class Event(models.Model):
     event_date = models.DateField()

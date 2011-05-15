@@ -1,4 +1,5 @@
 <?php
+ini_set('error_reporting', E_ALL);
 $dbnew = mysql_connect('localhost', 'founderdating', 'cofounder');
 if (!$dbnew) {
     die('Could not connect: ' . mysql_error());
@@ -9,7 +10,7 @@ function resetdb($db){
 	mysql_query("TRUNCATE TABLE profiles_fdprofile", $db) || die(mysql_error($db));
 	mysql_query("TRUNCATE TABLE profiles_recommendation", $db) || die(mysql_error($db));
 	mysql_query("TRUNCATE TABLE profiles_linkedinprofile", $db) || die(mysql_error($db));
-	mysql_query("DELETE FROM auth_user WHERE id > 1", $db) || die(mysql_error($db));
+	mysql_query("DELETE FROM auth_user WHERE id > 3", $db) || die(mysql_error($db));
 };
 
 resetdb($dbnew);
@@ -26,7 +27,7 @@ if (!$dbold) {
 }
 mysql_select_db('oldfd', $dbold);
 
-$user_id = 1;
+$user_id = 3;
 
 // Applicants
 $results = mysql_query("SELECT applications.*, users.* FROM applications 
@@ -60,7 +61,7 @@ while($row = mysql_fetch_assoc($results)){
 			"'" . mysql_escape_string($row['name']).  "', " .
 			"''," .  // lastname
 			"'" . mysql_escape_string($row['email']).  "', " .
-			"'" . mysql_escape_string($pass).  "', " .
+			"'" . mysql_escape_string($row['password']).  "', " .
 			"0,1,0," . // staff/active/super_user
 			"'" .  date('Y-m-d H:i:s', $row['last_login']) . "'," .
 			"'$created_at'" .
@@ -94,7 +95,6 @@ while($row = mysql_fetch_assoc($results)){
 			continue;
 		}
 	}
-	// print_r($obj);
 	switch($obj['can_start']){
 	  case 'Immediately': $can_start = 'immediately'; break;
 	  case 'Part-time now, full-time soon': $can_start = 'part now full soon'; break;
@@ -113,7 +113,7 @@ while($row = mysql_fetch_assoc($results)){
 	// Interests
 	$interests = $obj['areas_of_interest'];
 	if (!empty($obj['areas_of_interest_more'])){
-		foreach(split(',', $obj['areas_of_interest_more']) as $other_interest){
+		foreach(explode(',', $obj['areas_of_interest_more']) as $other_interest){
 			$interests[] = trim($other_interest);
 		}
 	}
@@ -130,7 +130,7 @@ while($row = mysql_fetch_assoc($results)){
 		"'$created_at', " .
 		"now()," .
 		"'" . mysql_escape_string(json_encode($interests)) . "', " .
-		"'" . mysql_escape_string($obj['linkedin_url']) . "'" .
+		"'" . mysql_escape_string($obj['linkedin']) . "'" .
 		")";
 	mysql_query($sql, $dbnew) || die ($sql . " " .mysql_error($dbnew));
 
@@ -149,9 +149,3 @@ while($row = mysql_fetch_assoc($results)){
 	//exit;
 	echo $row['email'] . " inserted" . "\n";
 }
-
-// Users
-
-// Profiles
-
-// Blog
