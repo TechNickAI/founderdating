@@ -179,6 +179,7 @@ ANONYMOUS_USER_ID = -1
 
 # django-userena
 AUTHENTICATION_BACKENDS = (
+    'fd.profiles.AuthBackends.LegacyBackend',
     'social_auth.backends.contrib.linkedin.LinkedinBackend', # social_auth
     'userena.backends.UserenaAuthenticationBackend',
     'guardian.backends.ObjectPermissionBackend',
