@@ -15,8 +15,12 @@
 <div id="fd_header">
   <div class="gasket">
     <div class="account">
+	<p>
+	{% if user.is_superuser %}
+	  <a href="/internal_admin/"><img src="/static/img/superman_icon.png"></a>
+	{% endif %}
 	{% if user.is_authenticated %}
-              <p>Signed in as 
+              Signed in as 
 		{%if user.first_name %}
 		  {{user.first_name}} {{user.last_name}}
 		{% else %}
@@ -26,10 +30,11 @@
 		    {{user.username}}
 		  {% endif %}
 		{% endif %}
-		&nbsp;&nbsp; <input type="button" onclick='window.location.href="/profiles/signout/"' class="small_button" value="Sign out" /></p>
+		&nbsp; &nbsp; <input type="button" onclick='window.location.href="/profiles/signout/"' class="small_button" value="Sign out" />
 	{% else %}
-              <p>You are not signed in &nbsp;&nbsp; <input type="button" onclick='window.location.href="/profiles/signin/"' class="small_button" value="Sign in" /></p>
+             You are not signed in &nbsp; &nbsp; <input type="button" onclick='window.location.href="/profiles/signin/"' class="small_button" value="Sign in" />
 	{% endif %}
+	</p>
     </div><!-- .account -->
 
     <h1><a href="/">FounderDating</a></h1>
