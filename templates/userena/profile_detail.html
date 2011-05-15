@@ -4,7 +4,7 @@
 {% block title %}{{ profile.user.username }}'s {% trans "profile" %}.{% endblock %}
 {% block content_title %}<h2>{{ profile.user.username }} {% if profile.user.get_full_name %}({{ profile.user.get_full_name }}){% endif %}</h2>{% endblock %}
 
-{% block content %}
+{% block fd_content %}
 <div class="white-box">
 
     {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
