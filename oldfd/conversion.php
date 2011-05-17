@@ -180,10 +180,12 @@ while($row = mysql_fetch_assoc($results)){
 		// Recommendations
 		if (!empty($obj['recommend'])){
 			foreach($obj['recommend'] as $r) {
-				$sql = "INSERT INTO profiles_recommendation VALUES(NULL, $profile_id," .
-					"'" . mysql_escape_string($r['name']) . "'," . 
-					"'" . mysql_escape_string($r['email']) . "')";
-				mysql_query($sql, $dbnew) || die ($sql . " " .mysql_error($dbnew));
+				if (!empty($r['name']) && !empty($r['email'])){
+					$sql = "INSERT INTO profiles_recommendation VALUES(NULL, $profile_id," .
+						"'" . mysql_escape_string($r['name']) . "'," . 
+						"'" . mysql_escape_string($r['email']) . "')";
+					mysql_query($sql, $dbnew) || die ($sql . " " .mysql_error($dbnew));
+				}
 			}
 		}
 	}
