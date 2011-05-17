@@ -1,5 +1,9 @@
 from django.contrib import admin
-from profiles.models import Interest, Event, EventLocation, Skillset
+from profiles.models import Applicant, Event, EventLocation, Interest, Skillset
+
+class ApplicantAdmin(admin.ModelAdmin):
+    list_filter = ['event']
+admin.site.register(Applicant, ApplicantAdmin)
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('event_location', 'event_date')

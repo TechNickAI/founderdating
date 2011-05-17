@@ -21,7 +21,6 @@ class FdProfile(UserenaBaseProfile):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
-
     bring_skillsets_json = models.CharField(max_length=255, blank=True, null=True)
     need_skillsets_json = models.CharField(max_length=255, blank=True, null=True)
     interests_json = models.CharField(max_length=255, blank=True, null=True)
@@ -32,6 +31,27 @@ class FdProfile(UserenaBaseProfile):
     event_status = models.CharField(max_length=25, choices =  EVENT_STATUS_CHOICES, default = 'Pending')
     linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
+
+class Applicant(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+
+    # Effectively a copy of FdProfile
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+    bring_skillsets_json = models.CharField(max_length=255, blank=True, null=True)
+    need_skillsets_json = models.CharField(max_length=255, blank=True, null=True)
+    recommend_json = models.CharField(max_length=255, blank=True, null=True)
+    interests_json = models.CharField(max_length=255, blank=True, null=True)
+    past_experience_blurb = models.TextField(blank=True, null=True)
+    bring_blurb = models.TextField(blank=True, null=True)
+    can_start = models.CharField(max_length=25, choices = FdProfile.START_CHOICES, blank=True, null=True)
+    idea_status = models.CharField(max_length=25, choices = FdProfile.IDEA_STATUS_CHOICES, blank=True, null=True)
+    event_status = models.CharField(max_length=25, choices =  FdProfile.EVENT_STATUS_CHOICES, default = 'Pending')
+    linkedin_url = models.URLField(blank=True, null=True)
+    event = models.ForeignKey('Event', null=True, blank=True)
+    event_status = models.CharField(max_length=25, choices = FdProfile.EVENT_STATUS_CHOICES, default = 'Pending')
+    
 
 class Recommendation(models.Model):
     fdprofile = models.ForeignKey('FdProfile')
@@ -94,7 +114,7 @@ def linkedin_extra_values(sender, user, response, details, **kwargs):
     """
     print "response=", response
     print "details=", details
-    response= {'last-name': 'Sullivan', 'headline': 'VP of Technology at Krux Digital', 'first-name': 'Nick', 'access_token': 'oauth_token_secret=a51a3341-1e3b-4df3-a1ee-bddc4c89e499&oauth_token=8da0d321-14cc-4d9e-9cba-ee17bd952d2a', 'site-standard-profile-request': {'url': 'http://www.linkedin.com/profile?viewProfile=&key=732523&authToken=u2nf&authType=name&trk=api*a101448*s101448*'}, 'id': '732523'}
+    response= {'last-name': 'Sullivan', 'headline': 'VP of Technology at Krux Digital', 'first-name': 'Nick', 'access_token': 'oauth_token_secret=xxxxx', 'site-standard-profile-request': {'url': 'http://www.linkedin.com/profile?viewProfile=&key=732523&authToken=u2nf&authType=name&trk=api*a101448*s101448*'}, 'id': '732523'}
 details= {'first_name': 'Nick', 'last_name': 'Sullivan', 'email': ''}
     """
     return True
