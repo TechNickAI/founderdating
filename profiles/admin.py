@@ -26,6 +26,7 @@ class ApplicantAdmin(admin.ModelAdmin):
     date_hierarchy = "created_at"
     ordering = ["-created_at"]
     save_on_top = True
+    list_select_related = True
     search_fields = ['name', 'email']
 
 admin.site.register(Applicant, ApplicantAdmin)
