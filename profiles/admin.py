@@ -16,9 +16,20 @@ class ApplicantAdmin(admin.ModelAdmin):
                 if rec['name'] != "":
                     out += '<a href="mailto:' + rec['email'] + '">' + rec['name'] + '</a><br />'
         return out
-            
     references.allow_tags = True
 
+    def email_references(modeladmin, request, queryset):
+        pass
+    email_references.short_description = "Email the references for the selected applicants"
+
+    def email_declination(modeladmin, request, queryset):
+        pass
+    email_declination.short_description = "Email a declination to  selected applicants"
+
+    def invite_to_event(modeladmin, request, queryset):
+        pass
+    invite_to_event.short_description = "Invite the selected candidates to event"
+        
 
     list_display = ('name', 'can_start', 'idea_status', 'event_status', 'linkedin_link', 'references', 'event')
     list_filter = ['event', 'event_status', 'can_start', 'idea_status']
@@ -28,6 +39,7 @@ class ApplicantAdmin(admin.ModelAdmin):
     save_on_top = True
     list_select_related = True
     search_fields = ['name', 'email']
+    actions = [email_references, email_declination, invite_to_event]
 
 admin.site.register(Applicant, ApplicantAdmin)
 
