@@ -4,7 +4,7 @@ $dbnew = mysql_connect('localhost', 'founderdating', 'cofounder');
 if (!$dbnew) {
     die('Could not connect: ' . mysql_error());
 }
-mysql_select_db('founderdating', $dbnew);
+mysql_select_db('founderdating_dev', $dbnew);
 
 function resetdb($db){
 	mysql_query("TRUNCATE TABLE profiles_fdprofile", $db) || die(mysql_error($db));
@@ -158,7 +158,8 @@ while($row = mysql_fetch_assoc($results)){
 			"'" . mysql_escape_string($obj['linkedin']) . "'," .
 			"'$event_id', " .
 			"'$event_status', " .
-			"'" . mysql_escape_string(json_encode(@$obj['recommend'])) . "'" .
+			"'" . mysql_escape_string(json_encode(@$obj['recommend'])) . "'," .
+			"'" . mysql_escape_string(json_encode(@$obj['building'])) . "'" .
 			")";
 		mysql_query($sql, $dbnew) || die ($sql . " " .mysql_error($dbnew));
 	} else {
@@ -173,7 +174,8 @@ while($row = mysql_fetch_assoc($results)){
 			"'$created_at', " .
 			"now()," .
 			"'" . mysql_escape_string(json_encode($interests)) . "', " .
-			"'" . mysql_escape_string($obj['linkedin']) . "'" .
+			"'" . mysql_escape_string($obj['linkedin']) . "'," .
+			"'" . mysql_escape_string(json_encode(@$obj['building'])) . "'" .
 			")";
 		mysql_query($sql, $dbnew) || die ($sql . " " .mysql_error($dbnew));
 

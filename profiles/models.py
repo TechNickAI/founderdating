@@ -46,6 +46,7 @@ class Applicant(models.Model):
     interests_json = models.TextField(blank=True, null=True)
     past_experience_blurb = models.TextField(blank=True, null=True)
     bring_blurb = models.TextField(blank=True, null=True)
+    building_blurb = models.TextField(blank=True, null=True)
     can_start = models.CharField(max_length=25, choices = FdProfile.START_CHOICES, blank=True, null=True)
     idea_status = models.CharField(max_length=25, choices = FdProfile.IDEA_STATUS_CHOICES, blank=True, null=True)
     event_status = models.CharField(max_length=25, choices =  FdProfile.EVENT_STATUS_CHOICES, default = 'Pending')
