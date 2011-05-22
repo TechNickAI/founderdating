@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-{% load static %}
-{% load cms_tags %}
+{% load static cms_tags %}
 {% get_static_prefix as STATIC_PREFIX %}
 
 <html lang="en">
 <head>
   <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}css/layout.css" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+  <meta name="description" content="{% page_attribute meta_description %}"/>
+  <meta name="keywords" content="{% page_attribute meta_keywords %}"/>
   <title>{% block title %}Founder Dating{% endblock %}</title>
   <script src="/static/js/jquery-1.5.2.min.js"></script>
   {% block meta %}{% endblock %}

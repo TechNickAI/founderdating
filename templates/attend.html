@@ -2,61 +2,61 @@
 
 {% block fd_content %}
 
-<form action="/application" method="post">
+<form action="/attend/save" method="post">
   
   <div id="request_form">
     
-    <h2><label for="f_name">Name</label></h2>
-    <p><input type="text" id="f_name" name="name" class="text" value="{%if user.first_name %}{{user.first_name}} {{user.last_name}}{%endif%}"/></p>
+    <h2><label for="name">Name</label></h2>
+    <p><input type="text" id="name" name="name" class="text" value="{%if user.first_name %}{{user.first_name}} {{user.last_name}}{%endif%}"/></p>
     
-    <h2><label for="f_email">Email address</label></h2>
-    <p><input type="text" id="f_email" name="email" class="text" value="{{user.email}}" /></p>
+    <h2><label for="email">Email address</label></h2>
+    <p><input type="text" id="email" name="email" class="text" value="{{user.email}}" /></p>
     
-    <h2><label for="f_event">Event</label></h2>
+    <h2><label for="event">Event</label></h2>
     <ul>
       {% for e in upcoming_events %}
-	<li><label><input type="radio" name="event" class="radio" value="{{e.id}}"/>{{e.event_location.display}} - {{e.event_date}}</label></li>
+	<li><label><input type="radio" name="event_id" class="radio" value="{{e.id}}"/>{{e.event_location.display}} - {{e.event_date}}</label></li>
       {% endfor %}
       {% if get.event %}
         <script>$('input[name=event][value="{{get.event}}"]').attr("checked", "true");</script>
       {% endif %}
     </ul>
     
-    <h2><label for="f_skillset">Specify your primary skillsets</label></h2>
+    <h2><label for="skillset">Specify your primary skillsets</label></h2>
     
     <ul>
       {% for skill in skillsets %}
-        <li><input type="checkbox" name="primary_skillsets" class="check" value="{{skill}}"/>{{skill}}</li>
+        <li><input type="checkbox" name="bring_skillsets" class="check" value="{{skill}}"/>{{skill}}</li>
       {% endfor %}
     </ul>
     
-    <h2><label for="f_past_experience">Please tell us about your previous experience</label></h2>
-    <p><textarea id="f_past_experience" name="past_experience" cols="40" rows="8"></textarea></p>
+    <h2><label for="past_experience">Please tell us about your previous experience</label></h2>
+    <p><textarea id="past_experience" name="past_experience_blurb" cols="40" rows="8"></textarea></p>
     
-    <h2><label for="f_linkedin">Linkedin Profile link</label></h2>
-    <p><input type="text" id="f_linkedin" name="linkedin" class="text" value="" /></p>
+    <h2><label for="linkedin">Linkedin Profile link</label></h2>
+    <p><input type="text" id="linkedin" name="linkedin_url" class="text" value="" /></p>
     
-    <h2><label for="f_bring">What do you think you bring to a founding team</label></h2>
-    <p><textarea id="f_bring" name="bring" cols="40" rows="8"></textarea></p>
+    <h2><label for="bring">What do you think you bring to a founding team</label></h2>
+    <p><textarea id="bring" name="bring_blurb" cols="40" rows="8"></textarea></p>
     
-    <h2><label for="f_classify">I would classify myself as the following</label></h2>
+    <h2><label for="classify">I would classify myself as the following</label></h2>
     <ul>
-      <li><label><input type="radio" name="classify" class="radio" value="I have an idea that I'm committed to"  /> I have an idea that I'm committed to</label></li>
-<li><label><input type="radio" name="classify" class="radio" value="I have and idea, but I'm also open to exploring other ideas"  /> I have and idea, but I'm also open to exploring other ideas</label></li>
-<li><label><input type="radio" name="classify" class="radio" value="I don't yet have an idea"  /> I don't yet have an idea</label></li>
+      <li><label><input type="radio" name="idea_status" class="radio" value="I have an idea that I'm committed to"  /> I have an idea that I'm committed to</label></li>
+<li><label><input type="radio" name="idea_status" class="radio" value="I have and idea, but I'm also open to exploring other ideas"  /> I have and idea, but I'm also open to exploring other ideas</label></li>
+<li><label><input type="radio" name="idea_status" class="radio" value="I don't yet have an idea"  /> I don't yet have an idea</label></li>
     </ul>
     
-    <h2><label for="f_interest">Areas of interest</label></h2>
+    <h2><label for="interest">Areas of interest</label></h2>
     <ul>
       {% for interest in interests %}
-	<li><input type="checkbox" name="areas_of_interest" class="check" value="{{interest}}"/>{{interest}}</li>
+	<li><input type="checkbox" name="interests" class="check" value="{{interest}}"/>{{interest}}</li>
       {% endfor %}
     </ul>
     
-    <h2><label for="f_areas_of_interest_more">Areas of Interest (Please add any additional interests you have)</label></h2>
-    <p><input type="text" id="f_areas_of_interest_more" name="areas_of_interest_more" class="text" value="" maxlength="100" /></p>
+    <h2><label for="interests_more">Areas of Interest (Please add any additional interests you have)</label></h2>
+    <p><input type="text" id=interests_more" name="interests_more" class="text" value="" maxlength="100" /></p>
     
-    <h2><label for="f_start">When can you start?</label></h2>
+    <h2><label for="start">When can you start?</label></h2>
     <ul>
       <li><label><input type="radio" name="can_start" class="radio" value="Immediately"  /> Immediately</label></li>
 <li><label><input type="radio" name="can_start" class="radio" value="Part-time now, full-time soon"  /> Part-time now, full-time soon</label></li>
@@ -64,55 +64,34 @@
 <li><label><input type="radio" name="can_start" class="radio" value="I don’t have much for the next several months"  /> I don’t have much for the next several months</label></li>
     </ul>
     
-    <h2><label for="f_partner_skillsets">I’m looking for a partner with the following skillsets</label></h2>
+    <h2><label for="partner_skillsets">I’m looking for a partner with the following skillsets</label></h2>
     <ul>
       {% for skill in skillsets %}
-        <li><input type="checkbox" name="partner_skillsets" class="check" value="{{skill}}"/>{{skill}}</li>
+        <li><input type="checkbox" name="need_skillsets" class="check" value="{{skill}}"/>{{skill}}</li>
       {% endfor %}
     </ul>
     
-    <h2><label for="f_building">Please tell us about what you&rsquo;re building or interested in. the more detail the better able we are to match you with potential partners.</label></h2>
-    <p><textarea id="f_building" name="building" cols="40" rows="8"></textarea></p>
+    <h2><label for="building">Please tell us about what you&rsquo;re building or interested in. the more detail the better able we are to match you with potential partners.</label></h2>
+    <p><textarea id="building" name="building" cols="40" rows="8"></textarea></p>
     
     <h2><label>People who would recommend you</label></h2>
     
     <p style="margin-bottom:2px;color:#666">Note: these should be people you've worked with in the past</p>
     
+   {% for i in three %} 
     <p style="margin:0">
       <div style="float:left; width:240px;">
         <label style="font-size:.7em;color:#666;">Name</label>
-        <input type="text" name="recommend[1][name]" class="text" style="font-size:.7em" value="" />
+        <input type="text" name="recommend_name" class="text" value="" />
       </div>
       <div style="float:left; width:240px;">
         <label style="font-size:.7em;color:#666;">Email</label>
-        <input type="text" name="recommend[1][email]" class="text" style="font-size:.7em" value="" />
+        <input type="text" name="recommend_email" class="text" value="" />
       </div>
       <div class="clear"></div>
     </p>
+   {% endfor %}
     
-    <p>
-      <div style="float:left; width:240px;">
-        <label style="font-size:.7em;color:#666;">Name</label>
-        <input type="text" name="recommend[2][name]" class="text" style="font-size:.7em" value="" />
-      </div>
-      <div style="float:left; width:240px;">
-        <label style="font-size:.7em;color:#666;">Email</label>
-        <input type="text" name="recommend[2][email]" class="text" style="font-size:.7em" value="" />
-      </div>
-      <div class="clear"></div>
-    </p>
-    
-    <p>
-      <div style="float:left; width:240px;">
-        <label style="font-size:.7em;color:#666;">Name</label>
-        <input type="text" name="recommend[3][name]" class="text" style="font-size:.7em" value="" />
-      </div>
-      <div style="float:left; width:240px;">
-        <label style="font-size:.7em;color:#666;">Email</label>
-        <input type="text" name="recommend[3][email]" class="text" style="font-size:.7em" value="" />
-      </div>
-      <div class="clear"></div>
-    </p>
     <br /> 
     <br /> 
     <p><input type="submit" value="Apply" /></p>
