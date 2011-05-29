@@ -21,8 +21,8 @@ class FdProfile(UserenaBaseProfile):
         ('denied', 'Denied')
     )
     FOUNDER_TYPE_CHOICES = (
-        ('technical', 'Technical'),
-        ('business', 'Business')
+        ('technical', 'Tech'),
+        ('business', 'Biz')
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -41,26 +41,32 @@ class FdProfile(UserenaBaseProfile):
     event = models.ForeignKey('Event', null=True, blank=True)
 
 class Applicant(models.Model):
+    GROUP_CHOICES = []
+    i = 0
+    while i < 10:
+        i += 1
+        GROUP_CHOICES.append((i,i))
+
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
 
     # Effectively a copy of FdProfile
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
-    bring_skillsets_json = models.TextField(blank=True, null=True)
-    need_skillsets_json = models.TextField(blank=True, null=True)
-    recommend_json = models.TextField(blank=True, null=True)
-    interests_json = models.TextField(blank=True, null=True)
-    past_experience_blurb = models.TextField(blank=True, null=True)
-    bring_blurb = models.TextField(blank=True, null=True)
-    building_blurb = models.TextField(blank=True, null=True)
+    bring_skillsets_json = models.TextField(blank=True, null=True, verbose_name="Skillsets brought")
+    need_skillsets_json = models.TextField(blank=True, null=True, verbose_name="Skillsets needed")
+    recommend_json = models.TextField(blank=True, null=True, verbose_name="Recommendations")
+    interests_json = models.TextField(blank=True, null=True, verbose_name="Interests")
+    past_experience_blurb = models.TextField(blank=True, null=True, verbose_name="Past experience")
+    bring_blurb = models.TextField(blank=True, null=True, verbose_name="What they bring")
+    building_blurb = models.TextField(blank=True, null=True, verbose_name="What they want to build")
     can_start = models.CharField(max_length=25, choices = FdProfile.START_CHOICES, blank=True, null=True)
     idea_status = models.CharField(max_length=25, choices = FdProfile.IDEA_STATUS_CHOICES, blank=True, null=True)
     event_status = models.CharField(max_length=25, choices =  FdProfile.EVENT_STATUS_CHOICES, default = 'Pending')
     founder_type = models.CharField(max_length=15, choices =  FdProfile.FOUNDER_TYPE_CHOICES, null=True, blank=True)
     linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
-    event_group = models.PositiveSmallIntegerField(null=True, blank=True)
+    event_group = models.PositiveSmallIntegerField(null=True, blank=True, choices=GROUP_CHOICES)
 
     def __unicode__(self):
         return '%s - %s - %s' % (self.name, self.event.event_location.display, self.event.event_date)
@@ -90,7 +96,7 @@ class Event(models.Model):
     apply_deadline = models.DateField()
 
     def __unicode__(self):
-        return '%s - %s' % (self.event_location.display, self.event_date)
+        return '%s, %s' % (self.event_location.city, self.event_date.strftime('%b %Y'))
 
 
 class EventLocation(models.Model):

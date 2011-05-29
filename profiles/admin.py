@@ -2,11 +2,15 @@ from django.contrib import admin
 from profiles.models import Applicant, Event, EventLocation, Interest, Skillset
 import json
 
+    
 class ApplicantAdmin(admin.ModelAdmin):
     def linkedin_link(self, obj):
         return '<a href="%s" target="_new"><nobr><img src="/static/img/linkedin_icon.png">Profile</nobr></a>' % (obj.linkedin_url)
     linkedin_link.allow_tags = True
     linkedin_link.short_description = 'LinkedIn'
+
+    class Media:
+        js = ("js/fd_applicant_admin.js",)
 
     def references(self, obj):
         out = ''
@@ -14,7 +18,11 @@ class ApplicantAdmin(admin.ModelAdmin):
             jrec = json.loads(obj.recommend_json)
             for rec in jrec:
                 if rec['name'] != "":
-                    out += '<a href="mailto:' + rec['email'] + '">' + rec['name'] + '</a><br />'
+                    if len(rec['name']) > 25:
+                        name = rec['name'][:25] + "..."
+                    else:
+                        name = rec['name']
+                    out += '<a href="mailto:' + rec['email'] + '">' + name + '</a><br />'
         return out
     references.allow_tags = True
 
@@ -31,8 +39,8 @@ class ApplicantAdmin(admin.ModelAdmin):
     invite_to_event.short_description = "Invite the selected candidates to event"
         
 
-    list_display = ('name', 'founder_type', 'event_group', 'event_status', 'linkedin_link', 'references', 'event')
-    list_filter = ['event', 'event_status', 'founder_type', 'can_start', 'idea_status']
+    list_display = ('name', 'event_status', 'founder_type', 'event_group', 'linkedin_link', 'references', 'event')
+    list_filter = ['event', 'event_status', 'founder_type', 'event_group', 'can_start', 'idea_status']
     list_editable = ('founder_type', 'event_group', 'event_status')
     date_hierarchy = "created_at"
     ordering = ["-created_at"]
@@ -40,7 +48,20 @@ class ApplicantAdmin(admin.ModelAdmin):
     list_select_related = True
     search_fields = ['name', 'email']
     actions = [email_references, email_declination, invite_to_event]
+    radio_fields  = {"founder_type": admin.HORIZONTAL}
 
+    fieldsets = (
+        ("Basic", {
+            'fields': ('name', 'email', 'linkedin_url')
+        }),
+        ('Event Categorization', {
+            'fields': ('event', 'event_status', 'founder_type', 'event_group')
+        }),
+        ('Bio', {
+            'fields': ('can_start', 'idea_status', 'bring_skillsets_json', 'need_skillsets_json', 'recommend_json', 'interests_json', 'past_experience_blurb', 'bring_blurb', 'building_blurb')
+        })
+    )
+    
 admin.site.register(Applicant, ApplicantAdmin)
 
 class EventAdmin(admin.ModelAdmin):
