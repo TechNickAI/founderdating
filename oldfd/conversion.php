@@ -5,6 +5,7 @@ if (!$dbnew) {
     die('Could not connect: ' . mysql_error());
 }
 mysql_select_db('founderdating_dev', $dbnew);
+//mysql_select_db('founderdating', $dbnew);
 
 function resetdb($db){
 	mysql_query("TRUNCATE TABLE profiles_fdprofile", $db) || die(mysql_error($db));
@@ -170,8 +171,8 @@ while($row = mysql_fetch_assoc($results)){
 			"'$event_id', " .
 			"'$event_status', " .
 			"'" . mysql_escape_string($recommend_json) . "'," .
-			"'" . mysql_escape_string(json_encode(@$obj['building'])) . "'" .
-			")";
+			"'" . mysql_escape_string(@$obj['building']) . "'," .
+			"NULL,NULL)";
 		mysql_query($sql, $dbnew) || die ($sql . " " .mysql_error($dbnew));
 	} else {
 		$sql = "INSERT INTO profiles_fdprofile VALUES($profile_id, $my_user_id, '$mugshot', '$privacy', $event_id," . 
@@ -186,8 +187,8 @@ while($row = mysql_fetch_assoc($results)){
 			"now()," .
 			"'" . mysql_escape_string(json_encode($interests)) . "', " .
 			"'" . mysql_escape_string($obj['linkedin']) . "'," .
-			"'" . mysql_escape_string(json_encode(@$obj['building'])) . "'" .
-			")";
+			"'" . mysql_escape_string(@$obj['building']) . "'," .
+			"NULL)";
 		mysql_query($sql, $dbnew) || die ($sql . " " .mysql_error($dbnew));
 
 		// Recommendations
