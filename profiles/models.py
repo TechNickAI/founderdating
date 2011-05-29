@@ -53,6 +53,9 @@ class Applicant(models.Model):
     linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
     event_status = models.CharField(max_length=25, choices = FdProfile.EVENT_STATUS_CHOICES, default = 'Pending')
+
+    def __unicode__(self):
+        return '%s - %s - %s' % (self.name, self.event.event_location.display, self.event.event_date)
     
 
 class Recommendation(models.Model):

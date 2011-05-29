@@ -3,6 +3,7 @@
 {% block fd_content %}
 
 <form action="/attend/save" method="post">
+{% csrf_token %}
   
   <div id="request_form">
     
@@ -41,9 +42,9 @@
     
     <h2><label for="classify">I would classify myself as the following</label></h2>
     <ul>
-      <li><label><input type="radio" name="idea_status" class="radio" value="I have an idea that I'm committed to"  /> I have an idea that I'm committed to</label></li>
-<li><label><input type="radio" name="idea_status" class="radio" value="I have and idea, but I'm also open to exploring other ideas"  /> I have and idea, but I'm also open to exploring other ideas</label></li>
-<li><label><input type="radio" name="idea_status" class="radio" value="I don't yet have an idea"  /> I don't yet have an idea</label></li>
+     {% for value, display in idea_status_choices.items %}
+      <li><label><input type="radio" name="idea_status" class="radio" value="{{ key }}"  /> {{ display }}</label></li>
+     {% endfor %}
     </ul>
     
     <h2><label for="interest">Areas of interest</label></h2>
@@ -58,10 +59,9 @@
     
     <h2><label for="start">When can you start?</label></h2>
     <ul>
-      <li><label><input type="radio" name="can_start" class="radio" value="Immediately"  /> Immediately</label></li>
-<li><label><input type="radio" name="can_start" class="radio" value="Part-time now, full-time soon"  /> Part-time now, full-time soon</label></li>
-<li><label><input type="radio" name="can_start" class="radio" value="Part-time now, full-time if it takes off"  /> Part-time now, full-time if it takes off</label></li>
-<li><label><input type="radio" name="can_start" class="radio" value="I don’t have much for the next several months"  /> I don’t have much for the next several months</label></li>
+     {% for value, display in start_choices.items %}
+      <li><label><input type="radio" name="can_start" class="radio" value="{{value}}"  /> {{display}}</label></li>
+     {% endfor %}
     </ul>
     
     <h2><label for="partner_skillsets">I’m looking for a partner with the following skillsets</label></h2>

@@ -21,6 +21,8 @@ urlpatterns = patterns('',
     (r'^accounts/', include('userena.urls')),
 
     # Application process
+    (r'^attend/save', 'fd.profiles.views.attend_save'),
+    (r'^attend/thanks', 'fd.profiles.views.attend_thanks'),
     (r'^attend', 'fd.profiles.views.attend'),
 
     # List upcoming events
