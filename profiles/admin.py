@@ -32,7 +32,7 @@ class ApplicantAdmin(admin.ModelAdmin):
         
 
     list_display = ('name', 'founder_type', 'event_group', 'event_status', 'linkedin_link', 'references', 'event')
-    list_filter = ['event', 'event_status', 'can_start', 'idea_status']
+    list_filter = ['event', 'event_status', 'founder_type', 'can_start', 'idea_status']
     list_editable = ('founder_type', 'event_group', 'event_status')
     date_hierarchy = "created_at"
     ordering = ["-created_at"]
