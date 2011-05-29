@@ -15,8 +15,14 @@ class FdProfile(UserenaBaseProfile):
     )
     EVENT_STATUS_CHOICES = (
         ('pending', 'Pending'),
-        ('accepted and attending', 'Accepted and Attending'),
+        ('checking references', 'Checking References'),
+        ('awaiting interview', 'Awaiting Interview'),
+        ('accepted and attending', 'Accepted & Attending'),
         ('denied', 'Denied')
+    )
+    FOUNDER_TYPE_CHOICES = (
+        ('technical', 'Technical'),
+        ('business', 'Business')
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -30,6 +36,7 @@ class FdProfile(UserenaBaseProfile):
     can_start = models.CharField(max_length=25, choices = START_CHOICES, blank=True, null=True)
     idea_status = models.CharField(max_length=25, choices = IDEA_STATUS_CHOICES, blank=True, null=True)
     event_status = models.CharField(max_length=25, choices =  EVENT_STATUS_CHOICES, default = 'Pending')
+    founder_type = models.CharField(max_length=15, choices =  FOUNDER_TYPE_CHOICES, null=True, blank=True)
     linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
 
@@ -50,9 +57,10 @@ class Applicant(models.Model):
     can_start = models.CharField(max_length=25, choices = FdProfile.START_CHOICES, blank=True, null=True)
     idea_status = models.CharField(max_length=25, choices = FdProfile.IDEA_STATUS_CHOICES, blank=True, null=True)
     event_status = models.CharField(max_length=25, choices =  FdProfile.EVENT_STATUS_CHOICES, default = 'Pending')
+    founder_type = models.CharField(max_length=15, choices =  FdProfile.FOUNDER_TYPE_CHOICES, null=True, blank=True)
     linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
-    event_status = models.CharField(max_length=25, choices = FdProfile.EVENT_STATUS_CHOICES, default = 'Pending')
+    event_group = models.PositiveSmallIntegerField(null=True, blank=True)
 
     def __unicode__(self):
         return '%s - %s - %s' % (self.name, self.event.event_location.display, self.event.event_date)

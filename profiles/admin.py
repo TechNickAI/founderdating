@@ -31,9 +31,9 @@ class ApplicantAdmin(admin.ModelAdmin):
     invite_to_event.short_description = "Invite the selected candidates to event"
         
 
-    list_display = ('name', 'can_start', 'idea_status', 'event_status', 'linkedin_link', 'references', 'event')
+    list_display = ('name', 'founder_type', 'event_group', 'event_status', 'linkedin_link', 'references', 'event')
     list_filter = ['event', 'event_status', 'can_start', 'idea_status']
-    list_editable = ('event_status',)
+    list_editable = ('founder_type', 'event_group', 'event_status')
     date_hierarchy = "created_at"
     ordering = ["-created_at"]
     save_on_top = True
