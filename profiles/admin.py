@@ -12,7 +12,7 @@ class ApplicantAdmin(admin.ModelAdmin):
         out = ''
         if len(obj.recommend_json) > 1:
             jrec = json.loads(obj.recommend_json)
-            for i, rec in jrec.items():
+            for rec in jrec:
                 if rec['name'] != "":
                     out += '<a href="mailto:' + rec['email'] + '">' + rec['name'] + '</a><br />'
         return out

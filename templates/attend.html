@@ -43,7 +43,7 @@
     <h2><label for="classify">I would classify myself as the following</label></h2>
     <ul>
      {% for value, display in idea_status_choices.items %}
-      <li><label><input type="radio" name="idea_status" class="radio" value="{{ key }}"  /> {{ display }}</label></li>
+      <li><label><input type="radio" name="idea_status" class="radio" value="{{ value }}"  /> {{ display }}</label></li>
      {% endfor %}
     </ul>
     
@@ -71,8 +71,8 @@
       {% endfor %}
     </ul>
     
-    <h2><label for="building">Please tell us about what you&rsquo;re building or interested in. the more detail the better able we are to match you with potential partners.</label></h2>
-    <p><textarea id="building" name="building" cols="40" rows="8"></textarea></p>
+    <h2><label for="building_blurb">Please tell us about what you're building or interested in. the more detail the better able we are to match you with potential partners.</label></h2>
+    <p><textarea id="building_blurb" name="building_blurb" cols="40" rows="8"></textarea></p>
     
     <h2><label>People who would recommend you</label></h2>
     

@@ -119,13 +119,11 @@ while($row = mysql_fetch_assoc($results)){
 			continue;
 		}
 	}
-	switch($obj['can_start']){
-	  case 'Immediately': $can_start = 'immediately'; break;
+	switch(@$obj['can_start']){
 	  case 'Part-time now, full-time soon': $can_start = 'part now full soon'; break;
 	  case 'Part-time now, full-time if it takes off': $can_start = 'part now full if no suck'; break;
 	  case "I don't have much for the next several months": $can_start = 'later'; break;
-	  case "I don’t have much for the next several months": $can_start = 'later'; break;
-	  default: echo "Unrecognized can_start:" . $obj['can_start']; continue;
+	  default: $can_start = 'immediately'; break;
 	}
 	switch ($obj['classify']){
 	  case "I have an idea that I'm committed to": $idea_status = 'straight'; break;
@@ -142,6 +140,19 @@ while($row = mysql_fetch_assoc($results)){
 		}
 	}
 
+	// Make recommend json proper. A simple array instead of an assoc.
+	if (!empty($obj['recommend'])){
+		$recommend = Array();
+		foreach($obj['recommend'] as $key => $value){
+			if (!empty($value['name'])){
+				$recommend[] = Array('name'=> $value['name'], 'email'=> $value['email']);
+			}
+		}
+		$recommend_json = json_encode($recommend);
+	} else {
+		$recommend_json = '[]';
+	}
+
 	if (empty($row['assigned_user_id'])){
 		$sql = "INSERT INTO profiles_applicant VALUES(NULL, " .
 			"'" . mysql_escape_string($row['name']).  "', " .
@@ -149,7 +160,7 @@ while($row = mysql_fetch_assoc($results)){
 			"'$created_at', " .
 			"'$created_at', " .
 			"'" . mysql_escape_string(json_encode($obj['primary_skillsets'])) . "', " .
-			"'" . mysql_escape_string(json_encode($obj['partner_skillsets'])) . "', " .
+			"'" . mysql_escape_string(json_encode(@$obj['partner_skillsets'])) . "', " .
 			"'" . mysql_escape_string(json_encode($interests)) . "', " .
 			"'" . mysql_escape_string($obj['past_experience']).  "', " .
 			"'" . mysql_escape_string($obj['bring']) . "', " .
@@ -158,7 +169,7 @@ while($row = mysql_fetch_assoc($results)){
 			"'" . mysql_escape_string($obj['linkedin']) . "'," .
 			"'$event_id', " .
 			"'$event_status', " .
-			"'" . mysql_escape_string(json_encode(@$obj['recommend'])) . "'," .
+			"'" . mysql_escape_string($recommend_json) . "'," .
 			"'" . mysql_escape_string(json_encode(@$obj['building'])) . "'" .
 			")";
 		mysql_query($sql, $dbnew) || die ($sql . " " .mysql_error($dbnew));
