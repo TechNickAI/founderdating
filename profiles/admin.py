@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.core.mail import EmailMessage
-from profiles.models import Applicant, Event, EventLocation, Interest, Skillset
+from profiles.models import Applicant, EmailTemplate, Event, EventLocation, Interest, Skillset
 import json
 
     
@@ -51,7 +51,6 @@ class ApplicantAdmin(admin.ModelAdmin):
     def email_references(self, request, queryset):
         emails_sent = 0
         queryset.update(event_status="checking references")
-        pass
     email_references.short_description = "Email the references for the selected applicants"
 
     def email_declination(self, request, queryset):
@@ -113,5 +112,8 @@ admin.site.register(Skillset, SkillsetAdmin)
 class InterestAdmin(admin.ModelAdmin):
     list_display = ('name', 'ord')
     ordering = ["ord"]
-    pass
 admin.site.register(Interest, InterestAdmin)
+
+class EmailTemplateAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'subject', 'message']
+admin.site.register(EmailTemplate, EmailTemplateAdmin)

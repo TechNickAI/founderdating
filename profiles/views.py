@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.decorators.http import require_POST
-from profiles.models import Applicant, Event, FdProfile
+from profiles.models import Applicant, EmailTemplate, Event, FdProfile
 import json
 
 def attend(request):
@@ -60,4 +60,8 @@ def events(request):
 @login_required
 def email_form(request):
     c = {}
+    email_templates = EmailTemplate.objects.filter(name = request.GET.get("email_template"))
+    if len(email_templates) > 0:
+        c.update({"email_template": email_templates[0]})
+        
     return render_to_response('email_form.html', c, context_instance=RequestContext(request))

@@ -1,22 +1,32 @@
 <style type="text/css">
-.email_form_{{template.id}} label {
+.email_form_{{email_template.id}} label {
 	font-weight: bold;
 	display: block;
 	float: left;
 	padding-top: 5px;
 	width: 75px;
 }
-.email_form_{{template.id}} textarea {
+.email_form_{{email_template.id}} textarea {
 	width: 400px;
 	height: 200px;
 }
+.email_form_{{email_template.id}} a {
+	text-decoration: underline;
+}
 </style>
-<div class="email_form_{{template.id}}">
+<div class="email_form_{{email_template.id}}">
+  <div style="float: right">
+    {% if email_template.id %}
+      <a href="/internal_admin/profiles/emailtemplate/{{email_template.id}}/">Edit template</a>
+    {% else %}
+      <a title="Remember the subject/message for this type of e-mail" href="/internal_admin/profiles/emailtemplate/add/?name={{get.email_template}}">Add template</a>
+    {% endif %}
+  </div>
   <label>From</label> <input type="text" name="from" value="{{user.email}}"/><br />
-  <label>Subject</label> <input type="text" name="subject" value="{{subject}}"/><br />
+  <label>Subject</label> <input type="text" name="subject" value="{{email_template.subject}}"/><br />
   <label>Message</label><br />
-	<textarea name="message">{{message}}</textarea><br />
+	<textarea name="message">{{email_template.message}}</textarea><br />
   Optional:<br />
-  <label>Override To</label> <input type="text" name="override_to" value="{%if settings.ENVIRONMENT == "dev" %}{{user.email}}{% endif %}"/> (for testing)<br />
+  <label title="Messages will go here instead of the applicant">Override To</label> <input type="text" name="override_to" value="{%if settings.ENVIRONMENT == "dev" %}{{user.email}}{% endif %}"/> (for testing)<br />
   <label>Bcc</label> <input type="text" name="bcc" value="{{bcc}}"/><br />
 </div>

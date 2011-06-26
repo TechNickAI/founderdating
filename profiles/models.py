@@ -124,6 +124,13 @@ class Interest(models.Model):
     def __unicode__(self):
         return self.name
 
+class EmailTemplate(models.Model):
+    name = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+
+    def __unicode__(self):
+        return self.name
 
 
 ### END of traditional models definition. Should this be moved to __init__.py?
