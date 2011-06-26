@@ -33,6 +33,13 @@ jQuery(document).ready(function() {
 // Handles bulk actions for emailing applicants by displaying an intermediary form
 jQuery(document).ready(function(){
     jQuery("select[name=action]").change(function (){
+
+        // Stick the dialog in the parent form and submit it 
+        var handleForm = function() {
+            var f = jQuery("#" + selected);
+            jQuery("#changelist-form").prepend(f).submit();
+        };
+
         var dd = jQuery(this);
         var selected = dd.val();
         if (selected == "email_declination" ||
@@ -40,17 +47,22 @@ jQuery(document).ready(function(){
             selected == "email_references" ||
             selected == "invite_to_event") {
     
-                // Create a div for holding the email temlate
-                if (jQuery("#" + selected).length === 0) {
-                    jQuery("body").prepend('<div id="' + selected + '"></div>');
-                }
+                // Remove any previous forms 
+                jQuery(".hidden_email_form").remove();
+
+                // Create a div for holding the email temlate inside the form
+                jQuery("#changelist-form").prepend('<div class="hidden_email_form" id="' + selected + '"></div>');
+
                 // Pull in the template via ajax and display it as a dialog
                 jQuery("#" + selected).load("/email_form?email_template=" + selected).dialog({
-                    "width": 440,
-                    "position": "top",
-                    "modal": true,
-                    "title": dd.find(":selected").text(),
+                    buttons: { "Send Message": handleForm },
+                    closeOnEscape: false,
+                    width: 440,
+                    position: "top",
+                    modal: true,
+                    title: dd.find(":selected").text(),
                 });
+
         }
     });
 });

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.core.mail import EmailMessage
 from profiles.models import Applicant, Event, EventLocation, Interest, Skillset
 import json
 
@@ -32,20 +33,39 @@ class ApplicantAdmin(admin.ModelAdmin):
         return out
     references.allow_tags = True
 
+    def bulk_email(self, request, queryset):
+        emails_sent = 0
+        email = EmailMessage(
+            subject = request.POST.get("subject"),
+            body = request.POST.get("message"),
+            bcc = request.POST.get("bcc"),
+            from_email = request.POST.get("from"))
+
+        for applicant in queryset:
+            email.to = [request.POST.get("override_to", applicant.email)]
+            email.to = ["nick@kruxdigital.com"]
+            email.send()
+            emails_sent += 1
+        
+        self.message_user(request, "%s e-mails sent" % emails_sent)
+
     def email_references(self, request, queryset):
-        pass
+        emails_sent = 0
+        queryset.update(event_status="checking references")
+        self.message_user(request, "%s e-mails sent" % emails_sent)
     email_references.short_description = "Email the references for the selected applicants"
 
     def email_declination(self, request, queryset):
-        pass
+        queryset.update(event_status="denied")
+        self.bulk_email(request, queryset)
     email_declination.short_description = "Email a declination to selected applicants"
 
     def invite_to_event(self, request, queryset):
-        pass
+        self.bulk_email(request, queryset)
     invite_to_event.short_description = "Invite the selected candidates to event"
         
     def email_applicant(self, request, queryset):
-        pass
+        self.bulk_email(request, queryset)
     email_applicant.short_description = "Email selected applicants"
 
 

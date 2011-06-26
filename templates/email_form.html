@@ -1,17 +1,17 @@
 <style type="text/css">
-#email_form label {
+.email_form_{{template.id}} label {
 	font-weight: bold;
 	display: block;
 	float: left;
 	padding-top: 5px;
 	width: 75px;
 }
-#email_form textarea {
+.email_form_{{template.id}} textarea {
 	width: 400px;
 	height: 200px;
 }
 </style>
-<div id="email_form">
+<div class="email_form_{{template.id}}">
   <label>From</label> <input type="text" name="from" value="{{user.email}}"/><br />
   <label>Subject</label> <input type="text" name="subject" value="{{subject}}"/><br />
   <label>Message</label><br />
@@ -19,5 +19,4 @@
   Optional:<br />
   <label>Override To</label> <input type="text" name="override_to" value="{%if settings.ENVIRONMENT == "dev" %}{{user.email}}{% endif %}"/> (for testing)<br />
   <label>Bcc</label> <input type="text" name="bcc" value="{{bcc}}"/><br />
-  <input type="button" value="Send Message">
 </div>
