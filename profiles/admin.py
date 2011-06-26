@@ -1,9 +1,10 @@
 from django.contrib import admin
-from django.template import Template, Context
+from django.template import Template, Context, Library
 from django.core.mail import EmailMessage
 from profiles.models import Applicant, EmailTemplate, Event, EventLocation, Interest, Skillset
 import json
 from profiles.csv_export import CsvExport
+
 
 def csv_export(admin, request, queryset):
     return CsvExport().csv_export(queryset)
@@ -47,8 +48,8 @@ class ApplicantAdmin(admin.ModelAdmin):
     def bulk_email(self, request, queryset):
         emails_sent = 0
         try: 
-            subject_template = Template(request.POST.get("subject"))
-            message_template = Template(request.POST.get("message"))
+            subject_template = Template("{% load fd_tags %} " + request.POST.get("subject"))
+            message_template = Template("{% load fd_tags %} " + request.POST.get("message"))
         except Exception as e:
             self.message_user(request, "Error parsing template: " + str(e))
             return 
@@ -73,8 +74,37 @@ class ApplicantAdmin(admin.ModelAdmin):
         self.message_user(request, "%s e-mails sent" % emails_sent)
 
     def email_references(self, request, queryset):
-        emails_sent = 0
         queryset.update(event_status="checking references")
+        emails_sent = 0
+        try: 
+            subject_template = Template("{% load fd_tags %} " + request.POST.get("subject"))
+            message_template = Template("{% load fd_tags %} " + request.POST.get("message"))
+        except Exception as e:
+            self.message_user(request, "Error parsing template: " + str(e))
+            return 
+
+        email = EmailMessage(
+            bcc = request.POST.get("bcc"),
+            from_email = request.POST.get("from"))
+
+        for applicant in queryset:
+            references = json.loads(applicant.recommend_json)
+
+            for reference in references:
+                c = Context({"applicant": applicant, "event": applicant.event, "reference": reference })
+                try:
+                    email.subject = subject_template.render(c)
+                    email.body = message_template.render(c)
+                except Exception as e:
+                    self.message_user(request, "Error rendering message: " % str(e))
+                    break
+
+                email.to = [request.POST.get("override_to", applicant.email)]
+                email.send()
+                emails_sent += 1
+        
+        self.message_user(request, "%s reference e-mails sent" % emails_sent)
+
     email_references.short_description = "Email the references for the selected applicants"
 
     def email_declination(self, request, queryset):
