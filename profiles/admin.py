@@ -2,8 +2,18 @@ from django.contrib import admin
 from django.core.mail import EmailMessage
 from profiles.models import Applicant, EmailTemplate, Event, EventLocation, Interest, Skillset
 import json
+from profiles.csv_export import CsvExport
 
-    
+def csv_export(admin, request, queryset):
+    return CsvExport().csv_export(queryset)
+csv_export.short_description = "Export selected records as csv"
+admin.site.add_action(csv_export, 'csv_export')
+
+def csv_export_all(admin, request, model):
+    return CsvExport().csv_export(admin.model.objects.all())
+csv_export_all.short_description = "Export ALL records as csv (select at least one record to use)"
+admin.site.add_action(csv_export_all, 'csv_export_all')
+
 class ApplicantAdmin(admin.ModelAdmin):
     def linkedin_link(self, obj):
         return '<a href="%s" target="_new"><nobr><img src="/static/img/linkedin_icon.png">Profile</nobr></a>' % (obj.linkedin_url)
