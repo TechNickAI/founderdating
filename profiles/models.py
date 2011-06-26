@@ -39,6 +39,7 @@ class FdProfile(UserenaBaseProfile):
     founder_type = models.CharField(max_length=15, choices =  FOUNDER_TYPE_CHOICES, null=True, blank=True)
     linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
+    comments = models.TextField(blank=True, null=True)
 
 class Applicant(models.Model):
     GROUP_CHOICES = []
@@ -67,6 +68,7 @@ class Applicant(models.Model):
     linkedin_url = models.URLField(blank=True, null=True)
     event = models.ForeignKey('Event', null=True, blank=True)
     event_group = models.PositiveSmallIntegerField(null=True, blank=True, choices=GROUP_CHOICES)
+    comments = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return '%s - %s - %s' % (self.name, self.event.event_location.display, self.event.event_date)

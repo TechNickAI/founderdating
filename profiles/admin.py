@@ -11,6 +11,9 @@ class ApplicantAdmin(admin.ModelAdmin):
 
     class Media:
         js = ("js/fd_applicant_admin.js",)
+        css = {
+            "all": ("css/admin.css",)
+        }
 
     def references(self, obj):
         out = ''
@@ -39,9 +42,9 @@ class ApplicantAdmin(admin.ModelAdmin):
     invite_to_event.short_description = "Invite the selected candidates to event"
         
 
-    list_display = ('name', 'event_status', 'founder_type', 'event_group', 'linkedin_link', 'references', 'event')
+    list_display = ('name', 'event_status', 'founder_type', 'event_group', 'linkedin_link', 'references', 'comments')
     list_filter = ['event', 'event_status', 'founder_type', 'event_group', 'can_start', 'idea_status']
-    list_editable = ('founder_type', 'event_group', 'event_status')
+    list_editable = ('founder_type', 'event_group', 'event_status', 'comments')
     date_hierarchy = "created_at"
     ordering = ["-created_at"]
     save_on_top = True
