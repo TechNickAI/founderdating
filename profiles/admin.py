@@ -10,9 +10,12 @@ class ApplicantAdmin(admin.ModelAdmin):
     linkedin_link.short_description = 'LinkedIn'
 
     class Media:
-        js = ("js/fd_applicant_admin.js",)
+        js = (
+            "js/fd_applicant_admin.js", # first because it puts jquery back into main name space
+            "js/jquery-ui-1.8.13.min.js"
+        )
         css = {
-            "all": ("css/admin.css",)
+            "all": ("css/jquery-ui-1.8.13.custom.css", "css/admin.css",)
         }
 
     def references(self, obj):
@@ -29,18 +32,22 @@ class ApplicantAdmin(admin.ModelAdmin):
         return out
     references.allow_tags = True
 
-    def email_references(modeladmin, request, queryset):
+    def email_references(self, request, queryset):
         pass
     email_references.short_description = "Email the references for the selected applicants"
 
-    def email_declination(modeladmin, request, queryset):
+    def email_declination(self, request, queryset):
         pass
-    email_declination.short_description = "Email a declination to  selected applicants"
+    email_declination.short_description = "Email a declination to selected applicants"
 
-    def invite_to_event(modeladmin, request, queryset):
+    def invite_to_event(self, request, queryset):
         pass
     invite_to_event.short_description = "Invite the selected candidates to event"
         
+    def email_applicant(self, request, queryset):
+        pass
+    email_applicant.short_description = "Email selected applicants"
+
 
     list_display = ('name', 'event_status', 'founder_type', 'event_group', 'linkedin_link', 'references', 'comments')
     list_filter = ['event', 'event_status', 'founder_type', 'event_group', 'can_start', 'idea_status']
@@ -50,7 +57,7 @@ class ApplicantAdmin(admin.ModelAdmin):
     save_on_top = True
     list_select_related = True
     search_fields = ['name', 'email']
-    actions = [email_references, email_declination, invite_to_event]
+    actions = [email_references, email_declination, invite_to_event, email_applicant]
     radio_fields  = {"founder_type": admin.HORIZONTAL}
 
     fieldsets = (

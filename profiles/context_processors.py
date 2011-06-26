@@ -1,9 +1,11 @@
 from fd.profiles.models import Interest, Event, EventLocation, Skillset
+import settings
 import datetime
 
 def fd_context(request):
     context = {}
     context["session"] = request.session
+    context['settings'] = settings
     context["get"] = request.GET.copy()
 
     # Bring in the event locations for the menu

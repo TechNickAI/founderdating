@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response, redirect
+from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.decorators.http import require_POST
 from profiles.models import Applicant, Event, FdProfile
@@ -55,3 +56,8 @@ def attend_thanks(request):
 def events(request):
     c = {}
     return render_to_response('events.html', c, context_instance=RequestContext(request))
+
+@login_required
+def email_form(request):
+    c = {}
+    return render_to_response('email_form.html', c, context_instance=RequestContext(request))
