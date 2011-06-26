@@ -37,6 +37,8 @@ jQuery(document).ready(function(){
         // Stick the dialog in the parent form and submit it 
         var handleForm = function() {
             var f = jQuery("#" + selected);
+            f.parent().fadeOut();
+            f.hide();
             jQuery("#changelist-form").prepend(f).submit();
         };
 
@@ -57,7 +59,7 @@ jQuery(document).ready(function(){
                 jQuery("#" + selected).load("/email_form?email_template=" + selected).dialog({
                     buttons: { "Send Message": handleForm },
                     closeOnEscape: false,
-                    width: 440,
+                    width: 540,
                     position: "top",
                     modal: true,
                     title: dd.find(":selected").text(),

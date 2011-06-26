@@ -7,11 +7,18 @@
 	width: 75px;
 }
 .email_form_{{email_template.id}} textarea {
-	width: 400px;
+	width: 500px;
 	height: 200px;
 }
 .email_form_{{email_template.id}} a {
 	text-decoration: underline;
+}
+
+.email_form_{{email_template.id}} input[name=subject]{
+	width: 400px;
+}
+.email_form_{{email_template.id}} input[type=email]{
+	width: 225px;
 }
 </style>
 <div class="email_form_{{email_template.id}}">
@@ -22,11 +29,11 @@
       <a title="Remember the subject/message for this type of e-mail" href="/internal_admin/profiles/emailtemplate/add/?name={{get.email_template}}">Add template</a>
     {% endif %}
   </div>
-  <label>From</label> <input type="text" name="from" value="{{user.email}}"/><br />
+  <label>From</label> <input type="email" name="from" value="{{user.email}}"/><br />
   <label>Subject</label> <input type="text" name="subject" value="{{email_template.subject}}"/><br />
   <label>Message</label><br />
 	<textarea name="message">{{email_template.message}}</textarea><br />
   Optional:<br />
-  <label title="Messages will go here instead of the applicant">Override To</label> <input type="text" name="override_to" value="{%if settings.ENVIRONMENT == "dev" %}{{user.email}}{% endif %}"/> (for testing)<br />
-  <label>Bcc</label> <input type="text" name="bcc" value="{{bcc}}"/><br />
+  <label title="Messages will go here instead of the applicant">Override To</label> <input type="email" name="override_to" value="{%if settings.ENVIRONMENT == "dev" %}{{user.email}}{% endif %}"/> (for testing)<br />
+  <label>Bcc</label> <input type="email" name="bcc" value="{{bcc}}"/><br />
 </div>

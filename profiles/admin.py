@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.template import Template, Context
 from django.core.mail import EmailMessage
 from profiles.models import Applicant, EmailTemplate, Event, EventLocation, Interest, Skillset
 import json
@@ -45,13 +46,26 @@ class ApplicantAdmin(admin.ModelAdmin):
 
     def bulk_email(self, request, queryset):
         emails_sent = 0
+        try: 
+            subject_template = Template(request.POST.get("subject"))
+            message_template = Template(request.POST.get("message"))
+        except Exception as e:
+            self.message_user(request, "Error parsing template: " + str(e))
+            return 
+
         email = EmailMessage(
-            subject = request.POST.get("subject"),
-            body = request.POST.get("message"),
             bcc = request.POST.get("bcc"),
             from_email = request.POST.get("from"))
 
         for applicant in queryset:
+            c = Context({"applicant": applicant, "event": applicant.event})
+            try:
+                email.subject = subject_template.render(c)
+                email.body = message_template.render(c)
+            except Exception as e:
+                self.message_user(request, "Error rendering message: " % str(e))
+                break
+
             email.to = [request.POST.get("override_to", applicant.email)]
             email.send()
             emails_sent += 1
