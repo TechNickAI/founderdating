@@ -43,17 +43,16 @@ class ApplicantAdmin(admin.ModelAdmin):
 
         for applicant in queryset:
             email.to = [request.POST.get("override_to", applicant.email)]
-            email.to = ["nick@kruxdigital.com"]
             email.send()
             emails_sent += 1
         
         self.message_user(request, "%s e-mails sent" % emails_sent)
 
-    def email_references(self, request, queryset):
-        emails_sent = 0
-        queryset.update(event_status="checking references")
-        self.message_user(request, "%s e-mails sent" % emails_sent)
-    email_references.short_description = "Email the references for the selected applicants"
+ #   def email_references(self, request, queryset):
+ #       emails_sent = 0
+ #       queryset.update(event_status="checking references")
+ #       self.message_user(request, "%s e-mails sent" % emails_sent)
+ #   email_references.short_description = "Email the references for the selected applicants"
 
     def email_declination(self, request, queryset):
         queryset.update(event_status="denied")
