@@ -4,15 +4,17 @@ from django.core.mail import EmailMessage
 from profiles.models import Applicant, EmailTemplate, Event, EventLocation, Interest, Skillset
 import json
 from profiles.csv_export import CsvExport
+from django.contrib.admin.views.main import ChangeList
 
-
-def csv_export(admin, request, queryset):
+def csv_export(admn, request, queryset):
     return CsvExport().csv_export(queryset)
 csv_export.short_description = "Export selected records as csv"
 admin.site.add_action(csv_export, 'csv_export')
 
-def csv_export_all(admin, request, model):
-    return CsvExport().csv_export(admin.model.objects.all())
+def csv_export_all(admn, request, queryset):
+    # We want the original criteria from the query set, but with a much higher limit
+    cl = ChangeList(request, admn.model, admn.list_display, admn.list_display_links, admn.list_filter, admn.date_hierarchy, admn.search_fields, admn.list_select_related, 100000, admn.list_editable, admn)
+    return CsvExport().csv_export(cl.get_query_set())
 csv_export_all.short_description = "Export ALL records as csv (select at least one record to use)"
 admin.site.add_action(csv_export_all, 'csv_export_all')
 
