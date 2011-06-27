@@ -6,12 +6,9 @@
     <meta http-equiv="cache-control" content="public" />
     <meta name="robots" content="follow, all" />
     <meta name="language" content="{{ LANGUAGE_CODE }}" />
-    <meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
-    <meta name="keywords" content="django, blog, zinnia, {{ tag_entry|join:", "}}, {% block meta-keywords %}{% endblock %}" />
-    <meta name="author" content="Fantomas42" />
+    <meta name="keywords" content="{{ tag_entry|join:", "}}, {% block meta-keywords %}{% endblock %}" />
     <meta name="engine" content="Zinnia {{ ZINNIA_VERSION }}" />
     {% block meta %}{% endblock %}
-    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="home" href="{% url zinnia_entry_archive_index %}" />
     <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ ZINNIA_MEDIA_URL }}css/screen.css" />
     <style type="text/css">
@@ -30,7 +27,7 @@
     <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url zinnia_entry_latest_feed %}" />
     {% block link %}{% endblock %}
     {% block script %}{% endblock %}
-    <title>Zinnia's Blog - {% block title %}{% endblock %}</title>
+    <title>Founder Dating Blog - {% block title %}{% endblock %}</title>
   </head>
   <body id="zinnia">
     <div class="container">
@@ -57,4 +54,3 @@
       </div>
     </div>
 {% endblock fd_content %}
-
